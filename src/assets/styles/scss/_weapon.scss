@@ -1,0 +1,20 @@
+$weapon_size: 2;
+
+#weapon {
+  width: $weapon_size * 1rem;
+  height: $weapon_size * 3rem;
+  background-color: #ff7979;
+  position: absolute;
+  right: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: $weapon_size * 1rem;
+    height: $weapon_size * 1rem;
+    background-color: inherit;
+    left: 0;
+    top: 0;
+    transform: translate(-100%, 100%);
+  }
+}
