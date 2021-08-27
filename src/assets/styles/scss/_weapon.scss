@@ -1,20 +1,16 @@
-$weapon_size: 2;
-
 #weapon {
-  width: $weapon_size * 1rem;
-  height: $weapon_size * 3rem;
-  background-color: #ff7979;
+  background-color: #fff;
   position: absolute;
-  right: 0;
+  transition: ease-out 0.3s;
 
-  &::before {
+  &::after {
     content: "";
     position: absolute;
-    width: $weapon_size * 1rem;
-    height: $weapon_size * 1rem;
+    width: 200%;
+    height: calc(100% / 3);
     background-color: inherit;
     left: 0;
     top: 0;
-    transform: translate(-100%, 100%);
+    transform: translate(-50%, 100%);
   }
 }
