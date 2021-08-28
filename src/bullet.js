@@ -3,6 +3,8 @@ class Bullet {
     this.color = color;
   }
 
+  
+
   draw() {
     let bullet = document.createElement("div");
     bullet.style.width = `${CELL}rem`;
