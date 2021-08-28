@@ -5,8 +5,6 @@ container.draw();
 weapon.draw();
 weapon.changeColor(COLOR["red"]);
 
-
-
 document.addEventListener("keyup", function (event) {
   switch (event.key) {
     case "ArrowUp":

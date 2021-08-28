@@ -1,9 +1,5 @@
-$container_width: 25rem;
-$container_height: 35rem;
-
 #container {
   position: relative;
-  width: $container_width;
-  height: $container_height;
-  background-color: #333;
+  background-color: #ecf0f1;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0 1px 3px -1px;
 }
