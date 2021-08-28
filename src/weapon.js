@@ -14,18 +14,22 @@ class Weapon {
   }
 
   position() {
-    return parseInt(this.init().style.marginTop.slice(0, -3));
+    return parseInt(this.init().style.marginTop.slice(0, -3)) / CELL; // row
   }
 
   changeColor(color) {
     this.init().style.backgroundColor = color;
   }
 
+  color() {
+    return this.init().style.backgroundColor;
+  }
+
   moveUp() {
-    this.init().style.marginTop = `${Math.max(0, this.position() - CELL)}rem`;
+    this.init().style.marginTop = `${Math.max(0, (this.position() - 1) * CELL)}rem`;
   }
 
   moveDown() {
-    this.init().style.marginTop = `${Math.min((CONTAINER_HEIGHT - 3) * CELL, this.position() + CELL)}rem`;
+    this.init().style.marginTop = `${Math.min((CONTAINER_HEIGHT - 1) * CELL, (this.position() + 1) * CELL)}rem`;
   }
 }

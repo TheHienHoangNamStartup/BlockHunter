@@ -1,15 +1,29 @@
 class Bullet {
-  constructor(color) {
+  constructor(row, color) {
+    this.row = row;
     this.color = color;
   }
-
-  
 
   draw() {
     let bullet = document.createElement("div");
     bullet.style.width = `${CELL}rem`;
     bullet.style.height = `${CELL}rem`;
+    bullet.className = "bullet";
     bullet.style.backgroundColor = this.color;
-    document.getElementById("weapon").appendChild(bullet);
+    bullet.style.marginTop = `${this.row * CELL}rem`;
+    bullet.style.marginRight = `0rem`;
+    document.getElementById("container").appendChild(bullet);
+  }
+
+  shoot() {
+    let bullets = document.getElementsByClassName("bullet");
+    let bullet = bullets[bullets.length - 1];
+    let timer = setInterval(() => {
+      let marginRightCurrent = parseInt(bullet.style.marginRight.slice(0, -3));
+      bullet.style.marginRight = `${marginRightCurrent + 1}rem`;
+    }, 50);
+    setTimeout(() => {
+      clearInterval(timer);
+    }, 100 * (CONTAINER_WIDTH + 4));
   }
 }

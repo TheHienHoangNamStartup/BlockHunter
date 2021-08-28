@@ -1,0 +1,7 @@
+.bullet {
+  position: absolute;
+  align-self: center;
+  transform: translateX(-100%) scale(0.8);
+  transition: linear 0.1s;
+  right: 0;
+}

@@ -2,6 +2,8 @@
   background-color: #fff;
   position: absolute;
   transition: ease-out 0.3s;
+  display: flex;
+  z-index: 1;
 
   &::after {
     content: "";

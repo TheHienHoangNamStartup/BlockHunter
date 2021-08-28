@@ -3,7 +3,7 @@ const weapon = new Weapon();
 
 container.draw();
 weapon.draw();
-weapon.changeColor(COLOR["red"]);
+weapon.changeColor(randomColor());
 
 document.addEventListener("keyup", function (event) {
   switch (event.key) {
@@ -13,6 +13,13 @@ document.addEventListener("keyup", function (event) {
 
     case "ArrowDown":
       weapon.moveDown();
+      break;
+
+    case "ArrowLeft":
+      const bullet = new Bullet(weapon.position() + 1, weapon.color());
+      bullet.draw();
+      bullet.shoot();
+      weapon.changeColor(randomColor());
       break;
 
     default:
