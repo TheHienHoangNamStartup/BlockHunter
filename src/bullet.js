@@ -21,9 +21,12 @@ class Bullet {
     let timer = setInterval(() => {
       let marginRightCurrent = parseInt(bullet.style.marginRight.slice(0, -3));
       bullet.style.marginRight = `${marginRightCurrent + 1}rem`;
-    }, 50);
+    }, 20);
     setTimeout(() => {
       clearInterval(timer);
-    }, 100 * (CONTAINER_WIDTH + 4));
+      setTimeout(() => {
+        bullet.remove();
+      }, 1000);
+    }, 20 * (CONTAINER_WIDTH - 1) * CELL);
   }
 }

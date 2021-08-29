@@ -7,8 +7,8 @@ class Container {
   draw() {
     let container = document.createElement("div");
     container.id = "container";
-    container.style.width = `${(this.width + 2) * CELL}rem`;
-    container.style.height = `${(this.height + 2) * CELL}rem`;
+    container.style.width = `${this.width * CELL}rem`;
+    container.style.height = `${this.height * CELL}rem`;
     container.style.padding = `${CELL}rem`;
     document.body.appendChild(container);
   }
