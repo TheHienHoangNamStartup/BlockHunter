@@ -7,9 +7,6 @@ class Weapon {
     let weapon = document.createElement("div");
     weapon.id = "weapon";
     weapon.style.marginTop = "0rem";
-    weapon.style.width = `${CELL}rem`;
-    weapon.style.height = `${CELL * 3}rem`;
-    weapon.style.right = `${CELL}rem`;
     weapon.style.backgroundColor = this.color;
     document.getElementById("container").appendChild(weapon);
   }

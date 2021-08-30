@@ -1,19 +1,26 @@
 #weapon {
+  width: calc(3 * var(--cell));
+  height: calc(3 * var(--cell));
+  right: var(--cell);
   position: absolute;
-  transition: ease-out 0.3s;
+  transition: background ease-out 1.5s, margin ease-out 0.3s;
   display: flex;
   border-radius: 0.5rem;
   z-index: 1;
+  background: 0 20px / cover url("/src/assets/images/streamline-icon-virus-lab-research-syringe@96x96.svg");
+  // background-image: url("/src/assets/images/streamline-icon-virus-lab-research-syringe@96x96.svg");
+  // background-position: center;
+  // background-repeat: no-repeat;
 
-  &::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: calc(100% / 3);
-    border-radius: 0.5rem 0 0 0.5rem;
-    background-color: inherit;
-    left: 0;
-    top: 0;
-    transform: translate(-100%, 100%);
-  }
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   width: 100%;
+  //   height: calc(100% / 3);
+  //   border-radius: 0.5rem 0 0 0.5rem;
+  //   background-color: inherit;
+  //   left: 0;
+  //   top: 0;
+  //   transform: translate(-100%, 100%);
+  // }
 }

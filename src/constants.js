@@ -1,7 +1,9 @@
 const CELL = 2; // CELL * 1rem | CELL * 16px
+document.documentElement.style.setProperty("--cell", `${CELL}rem`);
+
 const CONTAINER_WIDTH = 12;
 const CONTAINER_HEIGHT = 15;
-const WALL_WIDTH = 6;
+const WALL_WIDTH = 5;
 const COLOR = {
   red: "#e74c3c",
   orange: "#e67e22",
