@@ -41,8 +41,12 @@ document.addEventListener("keyup", function (event) {
   }
 });
 
-document.onclick = function () {
-  //
-  console.log(uname());
-  // checkCollision();
-};
+// document.onclick = function () {
+//   //
+//   console.log(uname());
+//   // checkCollision();
+// };
+setInterval(() => {
+  // console.log(uname());
+  checkCollision(uname());
+}, 20);
