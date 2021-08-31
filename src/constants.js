@@ -1,10 +1,22 @@
-const CELL = 2; // CELL * 1rem | CELL * 16px
-document.documentElement.style.setProperty("--cell", `${CELL}rem`);
+export const $ = document.querySelector.bind(document);
+export const $$ = document.querySelectorAll.bind(document);
 
-const CONTAINER_WIDTH = 12;
-const CONTAINER_HEIGHT = 15;
-const WALL_WIDTH = 5;
-const COLOR = {
+export const CELL = 2;
+
+export const BOARD_WIDTH = 12;
+export const BOARD_HEIGHT = 16;
+
+export const WALL_WIDTH = 5;
+export const WALL_HEIGHT = 14;
+
+export const WEAPON_WIDTH = 1;
+export const WEAPON_HEIGHT = 1;
+
+export const BLOCK_SPRITE = "./assets/images/covid.png";
+export const BULLET_SPRITE = "./assets/images/covid.png";
+// export const WEAPON_SPRITE = "./assets/images/....png";
+
+export const COLOR = {
   red: "#e74c3c",
   orange: "#e67e22",
   yellow: "#f1c40f",

@@ -1,42 +1,25 @@
-class Weapon {
-  constructor(color) {
+import { $, CELL } from "./constants.js";
+
+export default class Weapon {
+  constructor(width, height, color) {
+    this.width = width;
+    this.height = height;
     this.color = color;
+    // this.sprite = sprite;
   }
 
   draw() {
     let weapon = document.createElement("div");
-    weapon.id = "weapon";
-    weapon.style.marginTop = "0rem";
-    weapon.style.backgroundColor = this.color;
-    document.getElementById("container").appendChild(weapon);
-  }
+    weapon.className = "weapon";
 
-  get element() {
-    return document.getElementById("weapon");
-  }
+    Object.assign(weapon.style, {
+      width: `${this.width * CELL}rem`,
+      height: `${this.height * CELL}rem`,
+      backgroundColor: this.color,
+      // backgroundImage: `url(${this.sprite})`,
+      marginTop: `0rem`,
+    });
 
-  position() {
-    return parseInt(this.element.style.marginTop.slice(0, -3)) / CELL; // row
-  }
-
-  setColor(color) {
-    this.color = color; // maybe not necessary
-    this.element.style.backgroundColor = this.color;
-  }
-
-  // changeColor(color) {
-  //   this.element.style.backgroundColor = color;
-  // }
-
-  getColor() {
-    return this.element.style.backgroundColor;
-  }
-
-  moveUp() {
-    this.element.style.marginTop = `${Math.max(0, (this.position() - 1) * CELL)}rem`;
-  }
-
-  moveDown() {
-    this.element.style.marginTop = `${Math.min((CONTAINER_HEIGHT - 3) * CELL, (this.position() + 1) * CELL)}rem`;
+    $(".board").appendChild(weapon);
   }
 }

@@ -1,6 +1,6 @@
 import { $, CELL } from "./constants.js";
 
-export default class Wall {
+export default class Board {
   constructor(width, height, color) {
     this.width = width;
     this.height = height;
@@ -8,15 +8,16 @@ export default class Wall {
   }
 
   draw() {
-    let wall = document.createElement("div");
-    wall.className = "wall";
+    let board = document.createElement("div");
+    board.className = "board";
 
-    Object.assign(wall.style, {
+    Object.assign(board.style, {
       width: `${this.width * CELL}rem`,
       height: `${this.height * CELL}rem`,
       backgroundColor: this.color,
+      padding: `${CELL}rem`,
     });
 
-    $(".board").appendChild(wall);
+    $("body").appendChild(board);
   }
 }
