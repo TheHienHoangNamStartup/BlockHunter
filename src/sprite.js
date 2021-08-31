@@ -2,30 +2,18 @@ class Sprite {
   constructor(row, color) {
     this.row = row;
     this.color = color;
-    this.visible = true;
-    this.scale = 1;
+    this.velocityX;
+    this.velocityY;
+    this.removed = false;
   }
-
-
 
   setAnimation() {
 
   }
 
-  getVisible() {
-    return this.visible;
-  }
-
   setVelocity(x, y) {
-
-  }
-
-  getScale() {
-    return this.visible;
-  }
-
-  setScale(scale) {
-    this.visible = scale;
+    this.velocityX = x;
+    this.velocityY = y;
   }
 
   // Checks if the sprite is touching the target sprite

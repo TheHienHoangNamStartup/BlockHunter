@@ -2,12 +2,6 @@ class Block extends Sprite {
   constructor(row, col, color) {
     super(row, color);
     this.col = col;
-    this.removed = false;
-  }
-
-  collide(target) {
-    // Nếu block va chạm với tác nhân gây va chạm thì block sẽ bị gì?
-    // Xử lý điều sẽ xảy ra đối với block ở đây
   }
 
   draw() {
