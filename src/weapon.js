@@ -19,6 +19,11 @@ class Weapon {
     return parseInt(this.element.style.marginTop.slice(0, -3)) / CELL; // row
   }
 
+  setColor(color) {
+    this.color = color;
+    this.element.style.backgroundColor = this.color;
+  }
+
   changeColor(color) {
     this.element.style.backgroundColor = color;
   }
