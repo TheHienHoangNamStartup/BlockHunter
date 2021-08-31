@@ -11,27 +11,27 @@ class Weapon {
     document.getElementById("container").appendChild(weapon);
   }
 
-  init() {
+  get element() {
     return document.getElementById("weapon");
   }
 
   position() {
-    return parseInt(this.init().style.marginTop.slice(0, -3)) / CELL; // row
+    return parseInt(this.element.style.marginTop.slice(0, -3)) / CELL; // row
   }
 
   changeColor(color) {
-    this.init().style.backgroundColor = color;
+    this.element.style.backgroundColor = color;
   }
 
   getColor() {
-    return this.init().style.backgroundColor;
+    return this.element.style.backgroundColor;
   }
 
   moveUp() {
-    this.init().style.marginTop = `${Math.max(0, (this.position() - 1) * CELL)}rem`;
+    this.element.style.marginTop = `${Math.max(0, (this.position() - 1) * CELL)}rem`;
   }
 
   moveDown() {
-    this.init().style.marginTop = `${Math.min((CONTAINER_HEIGHT - 3) * CELL, (this.position() + 1) * CELL)}rem`;
+    this.element.style.marginTop = `${Math.min((CONTAINER_HEIGHT - 3) * CELL, (this.position() + 1) * CELL)}rem`;
   }
 }
