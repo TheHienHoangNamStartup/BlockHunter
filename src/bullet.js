@@ -13,17 +13,20 @@ class Bullet {
     document.getElementById("container").appendChild(bullet);
   }
 
+  get elements() {
+    return document.getElementsByClassName("bullet");
+  }
+
   shoot() {
-    let bullets = document.getElementsByClassName("bullet");
-    let bullet = bullets[bullets.length - 1];
+    let e = this.elements[this.elements.length - 1];
     let timer = setInterval(() => {
-      let marginRightCurrent = parseInt(bullet.style.marginRight.slice(0, -3));
-      bullet.style.marginRight = `${marginRightCurrent + CELL}rem`;
+      let marginRightCurrent = parseInt(e.style.marginRight.slice(0, -3));
+      e.style.marginRight = `${marginRightCurrent + CELL}rem`;
     }, 20);
     setTimeout(() => {
       clearInterval(timer);
       setTimeout(() => {
-        bullet.remove();
+        e.remove();
       }, 1000);
     }, 20 * CONTAINER_WIDTH);
   }
