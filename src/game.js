@@ -33,7 +33,7 @@ document.addEventListener("keyup", function (event) {
       const bullet = new Bullet(weapon.position() + 1, weapon.getColor());
       bullet.draw();
       bullet.shoot();
-      weapon.changeColor(randomColor());
+      weapon.setColor(randomColor());
       break;
 
     default:
