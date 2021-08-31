@@ -35,14 +35,16 @@ export function handleWeaponMove() {
   document.onkeydown = (event) => {
     switch (event.key) {
       case "ArrowUp":
-        CONST.$(".weapon").style.marginTop = `${Math.max(0, getWeaponPosition() - 1) * CONST.CELL}rem`;
+        let topEdge = Math.max(0, getWeaponPosition() - 1) * CONST.CELL;
+        CONST.$(".weapon").style.marginTop = `${topEdge}rem`;
         break;
 
       case "ArrowDown":
-        CONST.$(".weapon").style.marginTop = `${Math.min(
+        let bottomEdge = Math.min(
           (CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2) * CONST.CELL, // -2: padding of board is 1 CELL => top + bottom = 2 CELL
           (getWeaponPosition() + 1) * CONST.CELL
-        )}rem`;
+        );
+        CONST.$(".weapon").style.marginTop = `${bottomEdge}rem`;
         break;
 
       case "ArrowLeft":
