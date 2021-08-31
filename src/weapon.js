@@ -20,13 +20,13 @@ class Weapon {
   }
 
   setColor(color) {
-    this.color = color;
+    this.color = color; // maybe not necessary
     this.element.style.backgroundColor = this.color;
   }
 
-  changeColor(color) {
-    this.element.style.backgroundColor = color;
-  }
+  // changeColor(color) {
+  //   this.element.style.backgroundColor = color;
+  // }
 
   getColor() {
     return this.element.style.backgroundColor;
