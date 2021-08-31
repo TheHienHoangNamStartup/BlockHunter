@@ -1,4 +1,7 @@
-class Wall {
+class Wall extends Sprite {
+  constructor() {
+    super();
+  }
   draw() {
     let wall = document.createElement("div");
     wall.id = "wall";

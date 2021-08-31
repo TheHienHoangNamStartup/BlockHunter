@@ -1,5 +1,6 @@
-class Bullet {
+class Bullet extends Sprite {
   constructor(row, color) {
+    super();
     this.row = row;
     this.color = color;
   }
@@ -29,5 +30,10 @@ class Bullet {
         e.remove();
       }, 1000);
     }, 20 * CONTAINER_WIDTH);
+  }
+
+  collide(target) {
+    // Nếu bullet va chạm với tác nhân gây va chạm thì bullet sẽ bị gì?
+    // Xử lý điều sẽ xảy ra đối với bullet ở đây
   }
 }

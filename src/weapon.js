@@ -1,5 +1,6 @@
-class Weapon {
+class Weapon extends Sprite {
   constructor(color) {
+    super();
     this.color = color;
   }
 
