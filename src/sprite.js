@@ -1,8 +1,12 @@
 class Sprite {
-  constructor() {
+  constructor(row, color) {
+    this.row = row;
+    this.color = color;
     this.visible = true;
     this.scale = 1;
   }
+
+
 
   setAnimation() {
 

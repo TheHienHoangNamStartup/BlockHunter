@@ -1,9 +1,7 @@
 class Block extends Sprite {
   constructor(row, col, color) {
-    super();
-    this.row = row;
+    super(row, color);
     this.col = col;
-    this.color = color;
     this.removed = false;
   }
 

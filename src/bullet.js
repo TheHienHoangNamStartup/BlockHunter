@@ -1,8 +1,6 @@
 class Bullet extends Sprite {
   constructor(row, color) {
-    super();
-    this.row = row;
-    this.color = color;
+    super(row, color);
   }
 
   draw() {

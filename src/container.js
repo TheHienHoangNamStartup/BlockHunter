@@ -1,6 +1,5 @@
-class Container extends Sprite {
+class Container {
   constructor(width, height) {
-    super();
     this.width = width;
     this.height = height;
   }
