@@ -1,18 +1,16 @@
 import { $, CELL } from "./constants.js";
 
 export default class Block {
-  constructor(row, col, color, sprite) {
-    this.row = row;
+  constructor(col, color, wallColumn, sprite) {
     this.col = col;
     this.color = color;
+    this.wallColumn = wallColumn;
     this.sprite = sprite;
   }
 
   draw() {
     let block = document.createElement("div");
     block.className = "block";
-
-    block.setAttribute("row", this.row);
     block.setAttribute("col", this.col);
 
     Object.assign(block.style, {
@@ -22,6 +20,7 @@ export default class Block {
       backgroundImage: `url(${this.sprite})`,
     });
 
-    $(".wall").appendChild(block);
+    // this.wallColumn.appendChild(block);
+    this.wallColumn.prepend(block);
   }
 }

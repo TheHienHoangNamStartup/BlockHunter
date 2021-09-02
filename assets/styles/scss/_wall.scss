@@ -4,3 +4,9 @@
   border-radius: 0.5rem;
   align-self: center;
 }
+
+.wallColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

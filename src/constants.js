@@ -9,6 +9,8 @@ export const BOARD_HEIGHT = 17;
 export const WALL_WIDTH = 10;
 export const WALL_HEIGHT = 15;
 
+export const BLOCKS_WIDTH = 5;
+
 export const WEAPON_WIDTH = 1;
 export const WEAPON_HEIGHT = 1;
 
