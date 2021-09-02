@@ -7,7 +7,7 @@ function gameControl() {
   FUNC.createWall(CONST.WALL_WIDTH, CONST.WALL_HEIGHT);
 
   FUNC.createWeapon();
-  FUNC.handleWeaponMove();
+  FUNC.handleWeaponMoveAndShoot();
 }
 
 gameControl();

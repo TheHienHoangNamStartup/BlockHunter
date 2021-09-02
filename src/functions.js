@@ -31,29 +31,29 @@ export function createWeapon() {
   weapon.draw();
 }
 
-export function handleWeaponMove() {
+export function handleWeaponMoveAndShoot() {
   document.onkeydown = (event) => {
     switch (event.key) {
       case "ArrowUp":
-        let topEdge = Math.max(0, getWeaponPosition() - 1) * CONST.CELL;
-        CONST.$(".weapon").style.marginTop = `${topEdge}rem`;
+        let topEdge = 0;
+        let newPositionUp = getWeaponPosition() - 1;
+        CONST.$(".weapon").style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
         break;
 
       case "ArrowDown":
-        let bottomEdge = Math.min(
-          (CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2) * CONST.CELL, // -2: padding of board is 1 CELL => top + bottom = 2 CELL
-          (getWeaponPosition() + 1) * CONST.CELL
-        );
-        CONST.$(".weapon").style.marginTop = `${bottomEdge}rem`;
+        let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
+        let newPositionDown = getWeaponPosition() + 1;
+        CONST.$(".weapon").style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
         break;
 
+      case " ":
       case "ArrowLeft":
         createBullet(getWeaponPosition(), getWeaponColor());
+        handleBulletMove();
         changeWeaponColor();
         break;
 
       default:
-        console.warn("Unset!");
         break;
     }
   };
@@ -77,10 +77,39 @@ function createBlock(row, col, color, sprite = CONST.BLOCK_SPRITE) {
   block.draw();
 }
 
+function destroyBlock(row, col, color) {
+  let blocks = CONST.$$(".block");
+  blocks.forEach((block) => {
+    if (
+      block.getAttribute("row") === row &&
+      block.getAttribute("col") === col &&
+      block.style.backgroundColor === color
+    ) {
+      block.style.opacity = "0";
+    }
+  });
+}
+
 // BULLET---------------------------------------------------------------------------------------------
 function createBullet(row, color, sprite = CONST.BULLET_SPRITE) {
   let bullet = new Bullet(row, color, sprite);
   bullet.draw();
+}
+
+function handleBulletMove() {
+  let bullets = CONST.$$(".bullet");
+  let bullet = bullets[bullets.length - 1];
+  let step = 50;
+  let duration = setInterval(() => {
+    let currentPosition = parseInt(bullet.style.marginRight.slice(0, -3));
+    bullet.style.marginRight = `${currentPosition + CONST.CELL}rem`;
+    bullet.setAttribute("col", CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
+    destroyBlock(bullet.getAttribute("row"), bullet.getAttribute("col"), bullet.style.backgroundColor);
+  }, step);
+  setTimeout(() => {
+    clearInterval(duration);
+    bullet.remove();
+  }, step * CONST.BOARD_WIDTH);
 }
 
 // OTHER----------------------------------------------------------------------------------------------
@@ -89,24 +118,3 @@ function randomColor() {
   let randomIndex = Math.floor(Math.random() * colorValues.length);
   return colorValues[randomIndex];
 }
-
-// function uname() {
-//   let bulletsPosition = [];
-//   let bullets = document.getElementsByClassName("bullet");
-//   for (const bullet of bullets) {
-//     bulletsPosition.push({
-//       row: parseInt(bullet.style.marginTop.slice(0, -3)) / CELL,
-//       col: Math.ceil((CONTAINER_WIDTH * CELL - 1 - parseInt(bullet.style.marginRight.slice(0, -3))) / CELL),
-//     });
-//   }
-//   return bulletsPosition;
-// }
-
-// function checkCollision(array) {
-//   for (const item of array) {
-//     const blockTarget = document.querySelector(`.block[row="${item["row"]}"][col="${item["col"]}"]`);
-//     if (blockTarget) {
-//       blockTarget.style.visibility = "hidden";
-//     }
-//   }
-// }

@@ -3,11 +3,11 @@ export const $$ = document.querySelectorAll.bind(document);
 
 export const CELL = 2;
 
-export const BOARD_WIDTH = 12;
-export const BOARD_HEIGHT = 16;
+export const BOARD_WIDTH = 22;
+export const BOARD_HEIGHT = 17;
 
-export const WALL_WIDTH = 5;
-export const WALL_HEIGHT = 14;
+export const WALL_WIDTH = 10;
+export const WALL_HEIGHT = 15;
 
 export const WEAPON_WIDTH = 1;
 export const WEAPON_HEIGHT = 1;

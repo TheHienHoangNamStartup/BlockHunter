@@ -1,7 +1,18 @@
 .bullet {
   position: absolute;
-  transform: scale(0.9);
+  transform: scale(0);
+  opacity: 0;
   background-position: center;
   background-size: cover;
   border-radius: 0.5rem;
+  transition: linear 0.1s;
+  animation: shoot 1s linear forwards;
+}
+
+@keyframes shoot {
+  25%,
+  100% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
 }
