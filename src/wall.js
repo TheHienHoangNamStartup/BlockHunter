@@ -15,6 +15,7 @@ export default class Wall {
       width: `${this.width * CELL}rem`,
       height: `${this.height * CELL}rem`,
       backgroundColor: this.color,
+      marginLeft: `-${CELL}rem`,
     });
 
     $(".board").appendChild(wall);

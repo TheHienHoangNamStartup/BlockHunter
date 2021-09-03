@@ -13,17 +13,21 @@ export function createBoard(width, height, color = "#ecf0f1") {
 
 // WALL------------------------------------------------------------------------------------------------
 export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
-  let wall = new Wall(width, height, color);
+  let wall = new Wall(width + 1, height, color);
   wall.draw();
 
   if (createBlocks) {
-    for (let col = 0; col < blocksWidth; col++) {
+    for (let col = 0; col < blocksWidth + 1; col++) {
       let wallColumn = document.createElement("div");
       wallColumn.className = "wallColumn";
       wallColumn.setAttribute("col", col);
       wallColumn.style.width = `${CONST.CELL}rem`;
       for (let row = 0; row < height; row++) {
-        createBlock(col, randomColor(), wallColumn);
+        if (col == 0) {
+          createBlock(col, "#ecf0f1", wallColumn, "");
+        } else {
+          createBlock(col, randomColor(), wallColumn);
+        }
       }
       CONST.$(".wall").appendChild(wallColumn);
     }
@@ -90,7 +94,7 @@ function destroyOrCreateBlock(row, col, color) {
           if (wallColumn.children.length < CONST.WALL_HEIGHT) {
             createBlock(parseInt(col) + 1, color, wallColumn);
           }
-        } else if (parseInt(col) < CONST.WALL_WIDTH - 1) {
+        } else if (parseInt(col) < CONST.WALL_WIDTH) {
           let wallColumn = document.createElement("div");
           wallColumn.className = "wallColumn";
           wallColumn.setAttribute("col", parseInt(col) + 1);
@@ -102,7 +106,6 @@ function destroyOrCreateBlock(row, col, color) {
       isCollision = true;
     }
   });
-
   return isCollision;
 }
 
