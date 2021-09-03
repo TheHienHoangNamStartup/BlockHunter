@@ -71,7 +71,9 @@ function getWeaponColor() {
 }
 
 function changeWeaponColor() {
-  return (CONST.$(".weapon").style.backgroundColor = randomColor());
+  let colorRandom = randomColor();
+  CONST.$(".weapon").style.backgroundColor = colorRandom;
+  CONST.$(".weapon").style.setProperty("--color", colorRandom);
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
@@ -80,54 +82,60 @@ function createBlock(col, color, wallColumn, sprite = CONST.BLOCK_SPRITE) {
   block.draw();
 }
 
-function isBulletTheSamePositionAndColorAsBlockWhichHas(blockSelector, row, col, color) {
+function createWallColumn(col) {
+  let newWallColumn = document.createElement("div");
+  newWallColumn.className = "wallColumn";
+  newWallColumn.setAttribute("col", parseInt(col) + 1);
+  newWallColumn.style.width = `${CONST.CELL}rem`;
+  CONST.$(".wall").appendChild(newWallColumn);
+  return newWallColumn;
+}
+
+function checkCollisionAndColor(blockSelector, row, col, color) {
   let blockRow = (blockSelector.offsetTop / (16 * CONST.CELL) - 1).toString();
-  if (blockRow === row && blockSelector.getAttribute("col") === col && blockSelector.style.backgroundColor === color)
-    return true;
+  let isCollision = false;
+  let isSameColor = false;
+  if (blockRow === row && blockSelector.getAttribute("col") === col) {
+    isCollision = true;
+    isSameColor = blockSelector.style.backgroundColor === color;
+  }
+  return [isCollision, isSameColor];
 }
 
-function isBulletTheSamePositionButDiffirentColorFromBlockWhichHas(blockSelector, row, col, color) {
-  let blockRow = (blockSelector.offsetTop / (16 * CONST.CELL) - 1).toString();
-  if (blockRow === row && blockSelector.getAttribute("col") === col && blockSelector.style.backgroundColor != color)
-    return true;
+function checkAvailableWallColumn(col) {
+  let wallColumn = CONST.$(`.wallColumn[col="${parseInt(col) + 1}"]`);
+  if (wallColumn && wallColumn.children.length < CONST.WALL_HEIGHT) {
+    return wallColumn;
+  } else if (parseInt(col) < CONST.WALL_WIDTH) {
+    let newWallColumn = createWallColumn(col);
+    return newWallColumn;
+  }
 }
 
-function isBulletAtAnAvailableColumn(wallColumn) {
-  if (wallColumn && wallColumn.children.length < CONST.WALL_HEIGHT) return true;
-}
-
-function isBulletAtAnUnavailableColumn(col, wallColumn) {
-  if (!wallColumn && parseInt(col) < CONST.WALL_WIDTH) return true;
-}
-
-function destroyOrCreateBlock(row, col, color) {
+function handleBlockAction(row, col, color, isAdd) {
   let blocks = CONST.$$(".block");
   let isCollision = false;
-  blocks.forEach((block) => {
-    let blockRow = (block.offsetTop / (16 * CONST.CELL) - 1).toString();
-    if (blockRow === row && block.getAttribute("col") === col) {
-      isCollision = true;
-    }
+  let isDestroy = false;
 
-    if (isBulletTheSamePositionAndColorAsBlockWhichHas(block, row, col, color)) {
-      block.remove();
-    }
-    if (isBulletTheSamePositionButDiffirentColorFromBlockWhichHas(block, row, col, color)) {
-      let wallColumn = CONST.$(`.wallColumn[col="${parseInt(col) + 1}"]`);
-      if (isBulletAtAnAvailableColumn(wallColumn)) {
-        createBlock(parseInt(col) + 1, color, wallColumn);
-      }
-      if (isBulletAtAnUnavailableColumn(col, wallColumn)) {
-        let wallColumn = document.createElement("div");
-        wallColumn.className = "wallColumn";
-        wallColumn.setAttribute("col", parseInt(col) + 1);
-        wallColumn.style.width = `${CONST.CELL}rem`;
-        CONST.$(".wall").appendChild(wallColumn);
-        createBlock(parseInt(col) + 1, color, wallColumn);
+  blocks.forEach((block) => {
+    let [checkCollision, checkSameColor] = checkCollisionAndColor(block, row, col, color);
+
+    if (checkCollision) {
+      isCollision = true;
+
+      if (checkSameColor) {
+        block.remove();
+        isDestroy = true;
+      } else if (isAdd) {
+        let wallColumn = checkAvailableWallColumn(col);
+
+        if (wallColumn) {
+          createBlock(parseInt(col) + 1, color, wallColumn);
+        }
       }
     }
   });
-  return isCollision;
+  return [isCollision, isDestroy];
 }
 
 // BULLET---------------------------------------------------------------------------------------------
@@ -140,16 +148,19 @@ function handleBulletMove() {
   let bullets = CONST.$$(".bullet");
   let bullet = bullets[bullets.length - 1];
   let step = 50;
+  let isAdd = true;
   let duration = setInterval(() => {
     let currentPosition = parseInt(bullet.style.marginRight.slice(0, -3));
     bullet.style.marginRight = `${currentPosition + CONST.CELL}rem`;
     bullet.setAttribute("col", CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
-    let isCollision = destroyOrCreateBlock(
+    let [isCollision, isDestroy] = handleBlockAction(
       bullet.getAttribute("row"),
       bullet.getAttribute("col"),
-      bullet.style.backgroundColor
+      bullet.style.backgroundColor,
+      isAdd
     );
-    if (isCollision) {
+    isAdd = !isDestroy;
+    if (isCollision && !isDestroy) {
       clearInterval(duration);
       bullet.remove();
     }

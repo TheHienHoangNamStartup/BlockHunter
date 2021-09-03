@@ -1,4 +1,4 @@
-import { $, CELL } from "./constants.js";
+import { $, CELL, BOARD_WIDTH } from "./constants.js";
 
 export default class Weapon {
   constructor(width, height, color) {
@@ -11,6 +11,10 @@ export default class Weapon {
   draw() {
     let weapon = document.createElement("div");
     weapon.className = "weapon";
+
+    weapon.style.setProperty("--width", `${(BOARD_WIDTH - 3) * CELL}rem`);
+    weapon.style.setProperty("--color", this.color);
+    weapon.style.setProperty("--margin", `${CELL}rem`);
 
     Object.assign(weapon.style, {
       width: `${this.width * CELL}rem`,

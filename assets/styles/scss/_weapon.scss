@@ -1,5 +1,16 @@
 .weapon {
   border-radius: 0.5rem;
-  z-index: 1;
   transition: margin ease-out 0.3s, background ease-out 1s;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: var(--width);
+    border-top: 0.5rem dotted var(--color);
+    position: absolute;
+    top: 50%;
+    right: var(--margin);
+    transform: translateY(-50%);
+    opacity: 0.2;
+  }
 }
