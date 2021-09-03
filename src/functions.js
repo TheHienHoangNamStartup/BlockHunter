@@ -80,11 +80,6 @@ function createBlock(col, color, wallColumn, sprite = CONST.BLOCK_SPRITE) {
   block.draw();
 }
 
-function isGoingToRemoveBullet(blockSelector, row, col) {
-  let blockRow = (blockSelector.offsetTop / (16 * CONST.CELL) - 1).toString();
-  if (blockRow === row && blockSelector.getAttribute("col") === col) return true;
-}
-
 function isBulletTheSamePositionAndColorAsBlockWhichHas(blockSelector, row, col, color) {
   let blockRow = (blockSelector.offsetTop / (16 * CONST.CELL) - 1).toString();
   if (blockRow === row && blockSelector.getAttribute("col") === col && blockSelector.style.backgroundColor === color)
