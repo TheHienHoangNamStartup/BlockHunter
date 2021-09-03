@@ -109,7 +109,11 @@ function destroyOrCreateBlock(row, col, color) {
   let blocks = CONST.$$(".block");
   let isCollision = false;
   blocks.forEach((block) => {
-    isCollision = isGoingToRemoveBullet(block, row, col);
+    let blockRow = (block.offsetTop / (16 * CONST.CELL) - 1).toString();
+    if (blockRow === row && block.getAttribute("col") === col) {
+      isCollision = true;
+    }
+
     if (isBulletTheSamePositionAndColorAsBlockWhichHas(block, row, col, color)) {
       block.remove();
     }
@@ -150,12 +154,6 @@ function handleBulletMove() {
       bullet.getAttribute("col"),
       bullet.style.backgroundColor
     );
-    console.log(isCollision);
-    // let isCollision = isGoingToRemoveBullet(
-    //   bullet.getAttribute("row"),
-    //   bullet.getAttribute("col"),
-    //   bullet.style.backgroundColor
-    // );
     if (isCollision) {
       clearInterval(duration);
       bullet.remove();
