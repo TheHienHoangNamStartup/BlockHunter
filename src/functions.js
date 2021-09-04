@@ -112,6 +112,22 @@ function checkAvailableWallColumn(col) {
   }
 }
 
+function cluster(color, wallSelector) {
+  const array = Array.from(wallSelector.children);
+  let flag = false;
+  for (let index = 1; index < array.length; index++) {
+    if (array[index].style.backgroundColor === color) {
+      flag = true;
+      array[index].remove();
+    } else {
+      break;
+    }
+  }
+  if (flag) {
+    array[0].remove();
+  }
+}
+
 function handleBlockAction(row, col, color, isAdd) {
   let blocks = CONST.$$(".block");
   let isCollision = false;
@@ -131,6 +147,7 @@ function handleBlockAction(row, col, color, isAdd) {
 
         if (wallColumn) {
           createBlock(parseInt(col) + 1, color, wallColumn);
+          cluster(color, wallColumn);
         }
       }
     }
@@ -172,6 +189,17 @@ function handleBulletMove() {
 }
 
 // OTHER----------------------------------------------------------------------------------------------
+export function gravity() {
+  const array = Array.from(CONST.$(".wall").children);
+  console.log(array);
+  for (let i = 1; i < array.length; i++) {
+    const arrayChildren = Array.from(array[i].children);
+    for (let j = 0; j < arrayChildren.length; j++) {
+      console.log(arrayChildren[j].offsetTop);
+    }
+  }
+}
+
 function randomColor() {
   let colorValues = Object.values(CONST.COLOR);
   let randomIndex = Math.floor(Math.random() * colorValues.length);
