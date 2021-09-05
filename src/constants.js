@@ -20,7 +20,7 @@ export const BULLET_SPRITE = "./assets/images/covid.png";
 
 export const COLOR = {
   red: "#e74c3c",
-  orange: "#e67e22",
+  // orange: "#e67e22",
   yellow: "#f1c40f",
   blue: "#3498db",
   green: "#1abc9c",
