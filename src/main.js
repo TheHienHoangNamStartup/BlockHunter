@@ -9,7 +9,7 @@ function gameControl() {
   FUNC.createWeapon();
   FUNC.handleWeaponMoveAndShoot();
 
-  // FUNC.gravity();
+  FUNC.gravity();
 }
 
 gameControl();

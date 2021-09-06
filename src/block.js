@@ -1,7 +1,8 @@
 import { $, CELL } from "./constants.js";
 
 export default class Block {
-  constructor(col, color, wallColumn, sprite) {
+  constructor(row, col, color, wallColumn, sprite) {
+    this.row = row;
     this.col = col;
     this.color = color;
     this.wallColumn = wallColumn;
@@ -18,6 +19,7 @@ export default class Block {
       height: `${CELL}rem`,
       backgroundColor: this.color,
       backgroundImage: `url(${this.sprite})`,
+      marginTop: `${this.row * CELL}rem`
     });
 
     // this.wallColumn.appendChild(block);
