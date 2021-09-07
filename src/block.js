@@ -7,6 +7,7 @@ export default class Block {
     this.color = color;
     this.wallColumn = wallColumn;
     this.sprite = sprite;
+    this.draw();
   }
 
   draw() {

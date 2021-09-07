@@ -6,6 +6,7 @@ export default class Weapon {
     this.height = height;
     this.color = color;
     // this.sprite = sprite;
+    this.draw();
   }
 
   draw() {

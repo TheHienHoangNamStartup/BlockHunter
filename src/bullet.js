@@ -5,6 +5,7 @@ export default class Bullet {
     this.row = row;
     this.color = color;
     this.sprite = sprite;
+    this.draw();
   }
 
   draw() {
