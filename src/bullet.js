@@ -3,8 +3,9 @@ import Virus from "./virus.js";
 import * as CONST from "./constants.js";
 
 export default class Bullet extends Virus {
-  constructor(row, color, sprite) {
-    super(row, color, sprite);
+  constructor(row, color) {
+    super(row, color);
+    this.sprite = CONST.BULLET_SPRITE;
     this.init();
   }
 

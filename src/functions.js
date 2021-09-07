@@ -162,8 +162,8 @@ function handleBlockAction(row, col, color, isAdd) {
 }
 
 // BULLET---------------------------------------------------------------------------------------------
-function createBullet(row, color, sprite = CONST.BULLET_SPRITE) {
-  let bullet = new Bullet(row, color, sprite);
+function createBullet(row, color) {
+  let bullet = new Bullet(row, color);
 }
 
 function handleBulletMove() {
