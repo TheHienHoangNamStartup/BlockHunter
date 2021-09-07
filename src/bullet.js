@@ -12,7 +12,7 @@ export default class Bullet {
 
   init() {
     this.setClassName("bullet");
-    this.setRow();
+    this.setRow(this.row);
     this.setStyle();
     this.setAppended();
   }
@@ -21,16 +21,16 @@ export default class Bullet {
     this.bullet.className = className;
   }
 
-  setRow() {
-    this.bullet.setAttribute("row", this.row);
+  setRow(r) {
+    this.bullet.setAttribute("row", r);
   }
 
   getRow() {
     return this.bullet.getAttribute("row");
   }
 
-  setCol() {
-    this.bullet.setAttribute("col", this.col);
+  setCol(c) {
+    this.bullet.setAttribute("col", c);
   }
 
   getCol() {
