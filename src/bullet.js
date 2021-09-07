@@ -16,6 +16,8 @@ export default class Bullet extends Virus {
     this.setAppended(this.element);
   }
 
+  
+
   setStyle(e) {
     Object.assign(e.style, {
       width: `${CELL}rem`,

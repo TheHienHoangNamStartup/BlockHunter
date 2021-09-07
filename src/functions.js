@@ -7,32 +7,34 @@ import * as CONST from "./constants.js";
 
 var bullets = [];
 
-// BOARD-----------------------------------------------------------------------------------------------
-export function createBoard(width, height, color = "#ecf0f1") {
-  let board = new Board(width, height, color);
-}
-
-// WALL------------------------------------------------------------------------------------------------
-export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
-  let wall = new Wall(width + 1, height, color);
-
-  if (createBlocks) {
-    for (let col = 0; col < blocksWidth + 1; col++) {
-      let wallColumn = document.createElement("div");
-      wallColumn.className = "wallColumn";
-      wallColumn.setAttribute("col", col);
-      wallColumn.style.width = `${CONST.CELL}rem`;
-      for (let row = 0; row < height; row++) {
-        if (col == 0) {
-          createBlock(height - row - 1, col, "#ecf0f1", wallColumn, "");
-        } else {
-          createBlock(height - row - 1, col, randomColor(), wallColumn);
-        }
-      }
-      CONST.$(".wall").appendChild(wallColumn);
+// BULLET---------------------------------------------------------------------------------------------
+function handleBulletMove() {
+  let bullets = CONST.$$(".bullet");
+  let bullet = bullets[bullets.length - 1];
+  let step = 50;
+  let isAdd = true;
+  let duration = setInterval(() => {
+    let currentPosition = parseInt(bullet.style.marginRight.slice(0, -3));
+    bullet.style.marginRight = `${currentPosition + CONST.CELL}rem`;
+    bullet.setAttribute("col", CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
+    let [isCollision, isDestroy] = handleBlockAction(
+      bullet.getAttribute("row"),
+      bullet.getAttribute("col"),
+      bullet.style.backgroundColor,
+      isAdd
+    );
+    isAdd = !isDestroy;
+    if (isCollision && !isDestroy) {
+      clearInterval(duration);
+      bullet.remove();
     }
-  }
+  }, step);
+  setTimeout(() => {
+    clearInterval(duration);
+    bullet.remove();
+  }, step * CONST.BOARD_WIDTH);
 }
+
 
 // WEAPON----------------------------------------------------------------------------------------------
 export function createWeapon() {
@@ -163,32 +165,31 @@ function handleBlockAction(row, col, color, isAdd) {
   return [isCollision, isDestroy];
 }
 
-// BULLET---------------------------------------------------------------------------------------------
-function handleBulletMove() {
-  let bullets = CONST.$$(".bullet");
-  let bullet = bullets[bullets.length - 1];
-  let step = 50;
-  let isAdd = true;
-  let duration = setInterval(() => {
-    let currentPosition = parseInt(bullet.style.marginRight.slice(0, -3));
-    bullet.style.marginRight = `${currentPosition + CONST.CELL}rem`;
-    bullet.setAttribute("col", CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
-    let [isCollision, isDestroy] = handleBlockAction(
-      bullet.getAttribute("row"),
-      bullet.getAttribute("col"),
-      bullet.style.backgroundColor,
-      isAdd
-    );
-    isAdd = !isDestroy;
-    if (isCollision && !isDestroy) {
-      clearInterval(duration);
-      bullet.remove();
+// BOARD-----------------------------------------------------------------------------------------------
+export function createBoard(width, height, color = "#ecf0f1") {
+  let board = new Board(width, height, color);
+}
+
+// WALL------------------------------------------------------------------------------------------------
+export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
+  let wall = new Wall(width + 1, height, color);
+
+  if (createBlocks) {
+    for (let col = 0; col < blocksWidth + 1; col++) {
+      let wallColumn = document.createElement("div");
+      wallColumn.className = "wallColumn";
+      wallColumn.setAttribute("col", col);
+      wallColumn.style.width = `${CONST.CELL}rem`;
+      for (let row = 0; row < height; row++) {
+        if (col == 0) {
+          createBlock(height - row - 1, col, "#ecf0f1", wallColumn, "");
+        } else {
+          createBlock(height - row - 1, col, randomColor(), wallColumn);
+        }
+      }
+      CONST.$(".wall").appendChild(wallColumn);
     }
-  }, step);
-  setTimeout(() => {
-    clearInterval(duration);
-    bullet.remove();
-  }, step * CONST.BOARD_WIDTH);
+  }
 }
 
 // OTHER----------------------------------------------------------------------------------------------
