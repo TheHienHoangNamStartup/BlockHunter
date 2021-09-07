@@ -1,45 +1,21 @@
 import { $, CELL } from "./constants.js";
-import Virus from "./block.js";
+import Virus from "./virus.js";
 
-export default class Bullet  {
+export default class Bullet extends Virus {
   constructor(row, color, sprite) {
-    this.row = row;
-    this.col;
-    this.color = color;
-    this.sprite = sprite;
-    this.bullet = document.createElement("div");
+    super(row, color, sprite);
     this.init();
   }
 
   init() {
     this.setClassName("bullet");
     this.setRow(this.row);
-    this.setStyle();
-    this.setAppended(this.bullet);
+    this.setStyle(this.element);
+    this.setAppended(this.element);
   }
 
-  setClassName(className) {
-    this.bullet.className = className;
-  }
-
-  setRow(r) {
-    this.bullet.setAttribute("row", r);
-  }
-
-  getRow() {
-    return this.bullet.getAttribute("row");
-  }
-
-  setCol(c) {
-    this.bullet.setAttribute("col", c);
-  }
-
-  getCol() {
-    return this.bullet.getAttribute("col");
-  }
-
-  setStyle() {
-    Object.assign(this.bullet.style, {
+  setStyle(e) {
+    Object.assign(e.style, {
       width: `${CELL}rem`,
       height: `${CELL}rem`,
       backgroundColor: this.color,
@@ -50,8 +26,8 @@ export default class Bullet  {
     });
   }
 
-  setAppended(a) {
-    $(".board").appendChild(a);
+  setAppended(e) {
+    $(".board").appendChild(e);
   }
 
 }
