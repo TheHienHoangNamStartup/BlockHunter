@@ -5,6 +5,8 @@ import Weapon from "./weapon.js";
 import Bullet from "./bullet.js";
 import * as CONST from "./constants.js";
 
+var bullets = [];
+
 // BOARD-----------------------------------------------------------------------------------------------
 export function createBoard(width, height, color = "#ecf0f1") {
   let board = new Board(width, height, color);
@@ -52,7 +54,7 @@ export function handleWeaponMoveAndShoot() {
 
   document.onkeyup = (event) => {
     if (event.key === " " || event.key === "ArrowLeft") {
-      createBullet(getWeaponPosition(), getWeaponColor());
+      bullets.push(new Bullet(getWeaponPosition(), getWeaponColor()));
       handleBulletMove();
       changeWeaponColor();
     }
@@ -162,10 +164,6 @@ function handleBlockAction(row, col, color, isAdd) {
 }
 
 // BULLET---------------------------------------------------------------------------------------------
-function createBullet(row, color) {
-  let bullet = new Bullet(row, color);
-}
-
 function handleBulletMove() {
   let bullets = CONST.$$(".bullet");
   let bullet = bullets[bullets.length - 1];
