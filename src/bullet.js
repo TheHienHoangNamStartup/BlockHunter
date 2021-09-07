@@ -12,13 +12,27 @@ export default class Bullet extends Virus {
   init() {
     this.setClassName("bullet");
     this.setRow(this.row);
-    this.setStyle(this.element);
+    this.initStyle(this.element);
     this.setAppended(this.element);
   }
 
-  
+  setMarginRight(currentPosition) {
+    this.element.style.marginRight = `${currentPosition + CONST.CELL}rem`;
+  }
 
-  setStyle(e) {
+  getMarginRight() {
+    return this.element.style.marginRight.slice(0, -3);
+  }
+
+  getBackgroundColor() {
+    return this.element.style.backgroundColor;
+  }
+
+  setRemoved() {
+    this.element.remove();
+  }
+
+  initStyle(e) {
     Object.assign(e.style, {
       width: `${CELL}rem`,
       height: `${CELL}rem`,

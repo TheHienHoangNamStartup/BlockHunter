@@ -9,29 +9,28 @@ var ammunition = [];
 
 // BULLET---------------------------------------------------------------------------------------------
 function handleBulletMove() {
-  let bullets = CONST.$$(".bullet");
-  let bullet = bullets[bullets.length - 1];
+  let bullet = ammunition[ammunition.length - 1];
   let step = 50;
   let isAdd = true;
   let duration = setInterval(() => {
-    let currentPosition = parseInt(bullet.style.marginRight.slice(0, -3));
-    bullet.style.marginRight = `${currentPosition + CONST.CELL}rem`;
-    bullet.setAttribute("col", CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
+    let currentPosition = parseInt(bullet.getMarginRight());
+    bullet.setMarginRight(currentPosition);
+    bullet.setCol(CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
     let [isCollision, isDestroy] = handleBlockAction(
-      bullet.getAttribute("row"),
-      bullet.getAttribute("col"),
-      bullet.style.backgroundColor,
+      bullet.getRow(),
+      bullet.getCol(),
+      bullet.getBackgroundColor(),
       isAdd
     );
     isAdd = !isDestroy;
     if (isCollision && !isDestroy) {
       clearInterval(duration);
-      bullet.remove();
+      bullet.setRemoved();
     }
   }, step);
   setTimeout(() => {
     clearInterval(duration);
-    bullet.remove();
+    bullet.setRemoved();
   }, step * CONST.BOARD_WIDTH);
 }
 
