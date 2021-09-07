@@ -1,29 +1,35 @@
 import { $, CELL } from "./constants.js";
 
-export default class Block {
+
+
+export default class Block extends element{
   constructor(row, col, color, wallColumn, sprite) {
-    this.row = row;
+    super(row, color, sprite);
     this.col = col;
-    this.color = color;
     this.wallColumn = wallColumn;
-    this.sprite = sprite;
-    this.draw();
+    this.init();
   }
 
-  draw() {
-    let block = document.createElement("div");
-    block.className = "block";
-    block.setAttribute("col", this.col);
+  init() {
+    this.setClassName("block");
+    this.setRow(this.row);
+    this.setCol(this.col);
+    this.setStyle(this.element);
+    this.setPrepended(this.element);
+  }
 
-    Object.assign(block.style, {
+  setStyle(e) {
+    Object.assign(e.style, {
       width: `${CELL}rem`,
       height: `${CELL}rem`,
       backgroundColor: this.color,
       backgroundImage: `url(${this.sprite})`,
       marginTop: `${this.row * CELL}rem`
     });
-
-    // this.wallColumn.appendChild(block);
-    this.wallColumn.prepend(block);
   }
+
+  setPrepended(e) {
+    this.wallColumn.prepend(e);
+  }
+
 }

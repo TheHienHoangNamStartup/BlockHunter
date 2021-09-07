@@ -14,7 +14,7 @@ export default class Bullet {
     this.setClassName("bullet");
     this.setRow(this.row);
     this.setStyle();
-    this.setAppended();
+    this.setAppended(this.bullet);
   }
 
   setClassName(className) {
@@ -49,8 +49,8 @@ export default class Bullet {
     });
   }
 
-  setAppended() {
-    $(".board").appendChild(this.bullet);
+  setAppended(a) {
+    $(".board").appendChild(a);
   }
 
 }
