@@ -5,7 +5,7 @@ import Weapon from "./weapon.js";
 import Bullet from "./bullet.js";
 import * as CONST from "./constants.js";
 
-var bullets = [];
+var ammunition = [];
 
 // BULLET---------------------------------------------------------------------------------------------
 function handleBulletMove() {
@@ -56,7 +56,7 @@ export function handleWeaponMoveAndShoot() {
 
   document.onkeyup = (event) => {
     if (event.key === " " || event.key === "ArrowLeft") {
-      bullets.push(new Bullet(getWeaponPosition(), getWeaponColor()));
+      ammunition.push(new Bullet(getWeaponPosition(), getWeaponColor()));
       handleBulletMove();
       changeWeaponColor();
     }
