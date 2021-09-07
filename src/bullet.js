@@ -3,18 +3,42 @@ import { $, CELL } from "./constants.js";
 export default class Bullet {
   constructor(row, color, sprite) {
     this.row = row;
+    this.col;
     this.color = color;
     this.sprite = sprite;
-    this.draw();
+    this.bullet = document.createElement("div");
+    this.init();
   }
 
-  draw() {
-    let bullet = document.createElement("div");
-    bullet.className = "bullet";
+  init() {
+    this.setClassName("bullet");
+    this.setRow();
+    this.setStyle();
+    this.setAppended();
+  }
 
-    bullet.setAttribute("row", this.row);
+  setClassName(className) {
+    this.bullet.className = className;
+  }
 
-    Object.assign(bullet.style, {
+  setRow() {
+    this.bullet.setAttribute("row", this.row);
+  }
+
+  getRow() {
+    return this.bullet.getAttribute("row");
+  }
+
+  setCol() {
+    this.bullet.setAttribute("col", this.col);
+  }
+
+  getCol() {
+    return this.bullet.getAttribute("col");
+  }
+
+  setStyle() {
+    Object.assign(this.bullet.style, {
       width: `${CELL}rem`,
       height: `${CELL}rem`,
       backgroundColor: this.color,
@@ -23,7 +47,10 @@ export default class Bullet {
       marginRight: `0rem`,
       marginTop: `${this.row * CELL}rem`,
     });
-
-    $(".board").appendChild(bullet);
   }
+
+  setAppended() {
+    $(".board").appendChild(this.bullet);
+  }
+
 }

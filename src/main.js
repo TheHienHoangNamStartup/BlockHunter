@@ -1,3 +1,4 @@
+import * as VIRUS from "./virus.js";
 import * as CONST from "./constants.js";
 import * as FUNC from "./functions.js";
 
