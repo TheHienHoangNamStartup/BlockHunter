@@ -1,5 +1,6 @@
 import { $, CELL } from "./constants.js";
 import Virus from "./virus.js";
+import * as CONST from "./constants.js";
 
 export default class Bullet extends Virus {
   constructor(row, color, sprite) {
