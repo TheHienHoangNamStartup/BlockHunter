@@ -8,13 +8,11 @@ import * as CONST from "./constants.js";
 // BOARD-----------------------------------------------------------------------------------------------
 export function createBoard(width, height, color = "#ecf0f1") {
   let board = new Board(width, height, color);
-  // board.draw();
 }
 
 // WALL------------------------------------------------------------------------------------------------
 export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
   let wall = new Wall(width + 1, height, color);
-  // wall.draw();
 
   if (createBlocks) {
     for (let col = 0; col < blocksWidth + 1; col++) {
@@ -37,7 +35,6 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
 // WEAPON----------------------------------------------------------------------------------------------
 export function createWeapon() {
   let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor());
-  // weapon.draw();
 }
 
 export function handleWeaponMoveAndShoot() {
@@ -79,7 +76,6 @@ function changeWeaponColor() {
 // BLOCK----------------------------------------------------------------------------------------------
 function createBlock(row, col, color, wallColumn, sprite = CONST.BLOCK_SPRITE) {
   let block = new Block(row, col, color, wallColumn, sprite);
-  // block.draw();
 }
 
 function createWallColumn(col) {
@@ -168,7 +164,6 @@ function handleBlockAction(row, col, color, isAdd) {
 // BULLET---------------------------------------------------------------------------------------------
 function createBullet(row, color, sprite = CONST.BULLET_SPRITE) {
   let bullet = new Bullet(row, color, sprite);
-  // bullet.draw();
 }
 
 function handleBulletMove() {
