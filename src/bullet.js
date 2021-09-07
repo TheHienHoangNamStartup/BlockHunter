@@ -1,6 +1,7 @@
 import { $, CELL } from "./constants.js";
+import Virus from "./block.js";
 
-export default class Bullet {
+export default class Bullet  {
   constructor(row, color, sprite) {
     this.row = row;
     this.col;
