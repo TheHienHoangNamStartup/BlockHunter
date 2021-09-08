@@ -24,14 +24,6 @@ export default class Bullet extends Virus {
     return this.element.style.marginRight.slice(0, -3);
   }
 
-  getBackgroundColor() {
-    return this.element.style.backgroundColor;
-  }
-
-  setRemoved() {
-    this.element.remove();
-  }
-
   initStyle(e) {
     Object.assign(e.style, {
       width: `${CELL}rem`,

@@ -28,4 +28,12 @@ export default class Virus {
   getCol() {
     return this.element.getAttribute("col");
   }
+
+  getBackgroundColor() {
+    return this.element.style.backgroundColor;
+  }
+
+  setRemoved() {
+    this.element.remove();
+  }
 }

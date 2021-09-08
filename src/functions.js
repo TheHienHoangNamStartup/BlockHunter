@@ -58,9 +58,6 @@ function handleBulletMove() {
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
-// function createBlock(row, col, color, wallColumn) {
-//   let block = new Block(row, col, color, wallColumn);
-// }
 
 function createWallColumn(col) {
   let newWallColumn = document.createElement("div");
@@ -131,7 +128,7 @@ function handleBlockAction(row, col, color, isAdd) {
       isCollision = true;
 
       if (checkSameColor) {
-        block.remove();
+        block.setRemoved();
         isDestroy = true;
       } else if (isAdd) {
         let wallColumn = checkAvailableWallColumn(col);
@@ -144,6 +141,30 @@ function handleBlockAction(row, col, color, isAdd) {
   });
   return [isCollision, isDestroy];
 }
+
+// WALL------------------------------------------------------------------------------------------------
+export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
+  let wall = new Wall(width + 1, height, color);
+
+  if (createBlocks) {
+    for (let col = 0; col < blocksWidth + 1; col++) {
+      let wallColumn = document.createElement("div");
+      wallColumn.className = "wallColumn";
+      wallColumn.setAttribute("col", col);
+      wallColumn.style.width = `${CONST.CELL}rem`;
+      for (let row = 0; row < height; row++) {
+        if (col == 0) {
+          // let blockZero = new Block (height - row - 1, col, "#ecf0f1", wallColumn);
+          // blockZero.setSprite("");
+        } else {
+          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn));
+        }
+      }
+      CONST.$(".wall").appendChild(wallColumn);
+    }
+  }
+}
+
 
 // WEAPON----------------------------------------------------------------------------------------------
 export function createWeapon() {
@@ -167,29 +188,6 @@ function changeWeaponColor() {
 // BOARD-----------------------------------------------------------------------------------------------
 export function createBoard(width, height, color = "#ecf0f1") {
   let board = new Board(width, height, color);
-}
-
-// WALL------------------------------------------------------------------------------------------------
-export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
-  let wall = new Wall(width + 1, height, color);
-
-  if (createBlocks) {
-    for (let col = 0; col < blocksWidth + 1; col++) {
-      let wallColumn = document.createElement("div");
-      wallColumn.className = "wallColumn";
-      wallColumn.setAttribute("col", col);
-      wallColumn.style.width = `${CONST.CELL}rem`;
-      for (let row = 0; row < height; row++) {
-        if (col == 0) {
-          let blockZero = new Block (height - row - 1, col, "#ecf0f1", wallColumn);
-          blockZero.setSprite("");
-        } else {
-          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn));
-        }
-      }
-      CONST.$(".wall").appendChild(wallColumn);
-    }
-  }
 }
 
 // OTHER----------------------------------------------------------------------------------------------
