@@ -12,8 +12,8 @@ export default class Bullet extends Virus {
   init() {
     this.setClassName("bullet");
     this.setRow(this.row);
-    this.initStyle(this.element);
-    this.setAppended(this.element);
+    this.initStyle();
+    this.setAppended();
   }
 
   setMarginRight(currentPosition) {
@@ -24,8 +24,8 @@ export default class Bullet extends Virus {
     return this.element.style.marginRight.slice(0, -3);
   }
 
-  initStyle(e) {
-    Object.assign(e.style, {
+  initStyle() {
+    Object.assign(this.element.style, {
       width: `${CELL}rem`,
       height: `${CELL}rem`,
       backgroundColor: this.color,
@@ -36,8 +36,8 @@ export default class Bullet extends Virus {
     });
   }
 
-  setAppended(e) {
-    $(".board").appendChild(e);
+  setAppended() {
+    $(".board").appendChild(this.element);
   }
 
 }
