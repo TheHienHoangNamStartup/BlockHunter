@@ -192,14 +192,14 @@ function updateBlockRow() {
   });
 }
 
-function checkVertical(row, col, color) {
-  const block = CONST.$(`.block[row="${1 * row + 1}"][col="${1 * col + 1}"]`);
-  if (block) {
-    if (block.style.backgroundColor === color) {
-      removeEffect(block);
-    }
-  }
-}
+// function checkVertical(row, col, color) {
+//   const block = CONST.$(`.block[row="${1 * row + 1}"][col="${1 * col + 1}"]`);
+//   if (block) {
+//     if (block.style.backgroundColor === color) {
+//       removeEffect(block);
+//     }
+//   }
+// }
 
 // BULLET---------------------------------------------------------------------------------------------
 function handleBulletMove() {
@@ -213,7 +213,7 @@ function handleBulletMove() {
     if (isCollision) {
       clearInterval(duration);
       horizontalCluster(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor(), Number(isDestroy));
-      checkVertical(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
+      // checkVertical(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
       bullet.setRemoved();
     }
   }, step);
