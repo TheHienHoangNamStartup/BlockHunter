@@ -152,7 +152,7 @@ function handleBlockAction(row, col, color, isAdd) {
         let wallColumn = checkAvailableWallColumn(col);
 
         if (wallColumn) {
-          grid.push(new Block(row, parseInt(col) + 1, color, wallColumn));
+          grid.push(new Block(row, parseInt(col) + 1, color, wallColumn, CONST.BLOCK_SPRITE));
         }
       }
     }
@@ -172,10 +172,9 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
       wallColumn.style.width = `${CONST.CELL}rem`;
       for (let row = 0; row < height; row++) {
         if (col == 0) {
-          // let blockZero = new Block (height - row - 1, col, "#ecf0f1", wallColumn);
-          // blockZero.setSprite("");
+          grid.push(new Block (height - row - 1, col, "#ecf0f1", wallColumn, ""));
         } else {
-          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn));
+          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn, CONST.BLOCK_SPRITE));
         }
       }
       CONST.$(".wall").appendChild(wallColumn);

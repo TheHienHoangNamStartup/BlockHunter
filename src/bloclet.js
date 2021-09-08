@@ -1,11 +1,11 @@
 import { $, CELL } from "./constants.js";
+import * as CONST from "./constants.js";
 
-export default class Virus {
-  constructor(row, color, sprite) {
+export default class Bloclet {
+  constructor(row, color) {
     this.row = row;
     this.col;
     this.color = color;
-    this.sprite = sprite;
     this.element = document.createElement("div");
   }
 

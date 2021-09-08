@@ -1,8 +1,8 @@
 import { $, CELL } from "./constants.js";
-import Virus from "./virus.js";
+import Bloclet from "./bloclet.js";
 import * as CONST from "./constants.js";
 
-export default class Bullet extends Virus {
+export default class Bullet extends Bloclet {
   constructor(row, color) {
     super(row, color);
     this.sprite = CONST.BULLET_SPRITE;

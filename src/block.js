@@ -1,13 +1,13 @@
 import { $, CELL } from "./constants.js";
-import Virus from "./virus.js";
+import Bloclet from "./bloclet.js";
 import * as CONST from "./constants.js";
 
-export default class Block extends Virus {
-  constructor(row, col, color, wallColumn) {
+export default class Block extends Bloclet {
+  constructor(row, col, color, wallColumn, sprite) {
     super(row, color);
     this.col = col;
     this.wallColumn = wallColumn;
-    this.sprite = CONST.BLOCK_SPRITE;
+    this.sprite = sprite;
     this.init();
   }
 
