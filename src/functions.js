@@ -25,7 +25,7 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
       wallColumn.style.width = `${CONST.CELL}rem`;
       for (let row = 0; row < height; row++) {
         if (col == 0) {
-          grid.push(new Block (height - row - 1, col, "#ecf0f1", wallColumn, ""));
+          grid.push(new Block(height - row - 1, col, "#ecf0f1", wallColumn, ""));
         } else {
           grid.push(new Block(height - row - 1, col, randomColor(), wallColumn, CONST.BLOCK_SPRITE));
         }
@@ -107,37 +107,56 @@ function checkAvailableWallColumn(col) {
   }
 }
 
-function cluster(wallSelector) {
+function verticalCluster(wallSelector) {
   const wallColumn = Array.from(wallSelector.children);
   let len = wallColumn.length - 1;
   while (len > 0) {
     const blockColor = wallColumn[len].style.backgroundColor;
     let destroyArray = [len];
     let flag = false;
-      for (var j = len - 1; j >= 0; j--) {
-        if (wallColumn[j].style.backgroundColor === blockColor) {
-          destroyArray.push(j);
-          flag = true;
-        }
-        else {
-          break;
-        }
+    for (var j = len - 1; j >= 0; j--) {
+      if (wallColumn[j].style.backgroundColor === blockColor) {
+        destroyArray.push(j);
+        flag = true;
+      } else {
+        break;
       }
+    }
     len = Math.min(len - 1, destroyArray[destroyArray.length - 1]);
     if (flag) {
       setTimeout(() => {
         destroyArray.forEach((index) => {
           wallColumn[index].remove();
-        })
-      }, 600)
+        });
+      }, 600);
     }
   }
 }
 
-function handleBlockAction(row, col, color, isAdd) {
+function horizontalCluster(row, col, color) {
+  let isDestroy = false;
+  for (let index = col - 1; index > 0; index--) {
+    const block = CONST.$(`.block[row='${row}'][col='${index}']`);
+    if (block) {
+      if (block.style.backgroundColor === color) {
+        block.remove();
+        isDestroy = true;
+      } else {
+        isDestroy = false;
+      }
+    } else {
+      isDestroy = false;
+    }
+
+    if (!isDestroy) {
+      break;
+    }
+  }
+}
+
+function handleBlockAction(row, col, color) {
   let blocks = CONST.$$(".block");
   let isCollision = false;
-  let isDestroy = false;
 
   blocks.forEach((block) => {
     let [checkCollision, checkSameColor] = checkCollisionAndColor(block, row, col, color);
@@ -147,8 +166,7 @@ function handleBlockAction(row, col, color, isAdd) {
 
       if (checkSameColor) {
         block.remove();
-        isDestroy = true;
-      } else if (isAdd) {
+      } else {
         let wallColumn = checkAvailableWallColumn(col);
 
         if (wallColumn) {
@@ -157,27 +175,28 @@ function handleBlockAction(row, col, color, isAdd) {
       }
     }
   });
-  return [isCollision, isDestroy];
+  return isCollision;
+}
+
+function updateBlockRow() {
+  const blocks = Array.from(CONST.$$(".block"));
+  blocks.forEach((block) => {
+    block.setAttribute("row", `${parseInt(block.style.marginTop.slice(0, -3) / CONST.CELL)}`);
+  });
 }
 
 // BULLET---------------------------------------------------------------------------------------------
 function handleBulletMove() {
   let bullet = ammunition[ammunition.length - 1];
   let step = 50;
-  let isAdd = true;
   let duration = setInterval(() => {
     let currentPosition = parseInt(bullet.getMarginRight());
     bullet.setMarginRight(currentPosition);
     bullet.setCol(CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
-    let [isCollision, isDestroy] = handleBlockAction(
-      bullet.getRow(),
-      bullet.getCol(),
-      bullet.getBackgroundColor(),
-      isAdd
-    );
-    isAdd = !isDestroy;
-    if (isCollision && !isDestroy) {
+    let isCollision = handleBlockAction(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
+    if (isCollision) {
       clearInterval(duration);
+      horizontalCluster(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
       bullet.setRemoved();
     }
   }, step);
@@ -196,10 +215,11 @@ export function gravity() {
       wallColumn.forEach((block, index) => {
         const number = wallColumn.length - index - 1;
         block.style.marginTop = `${(CONST.WALL_HEIGHT - number - 1) * CONST.CELL}rem`;
-      })
-      cluster(wall[i]);
+      });
+      updateBlockRow();
+      verticalCluster(wall[i]);
     }
-  }, 100)
+  }, 100);
 }
 
 function randomColor() {
