@@ -2,7 +2,7 @@ import { $, CELL } from "./constants.js";
 import Virus from "./virus.js";
 import * as CONST from "./constants.js";
 
-export default class Block extends Virus{
+export default class Block extends Virus {
   constructor(row, col, color, wallColumn) {
     super(row, color);
     this.col = col;
