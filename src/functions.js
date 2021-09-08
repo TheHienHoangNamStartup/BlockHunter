@@ -58,8 +58,8 @@ function handleBulletMove() {
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
-function createBlock(row, col, color, wallColumn, sprite = CONST.BLOCK_SPRITE) {
-  let block = new Block(row, col, color, wallColumn, sprite);
+function createBlock(row, col, color, wallColumn) {
+  let block = new Block(row, col, color, wallColumn);
 }
 
 function createWallColumn(col) {
@@ -181,7 +181,8 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
       wallColumn.style.width = `${CONST.CELL}rem`;
       for (let row = 0; row < height; row++) {
         if (col == 0) {
-          createBlock(height - row - 1, col, "#ecf0f1", wallColumn, "");
+          let blockZero = new Block (height - row - 1, col, "#ecf0f1", wallColumn);
+          blockZero.setSprite("");
         } else {
           createBlock(height - row - 1, col, randomColor(), wallColumn);
         }

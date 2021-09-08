@@ -1,11 +1,13 @@
 import { $, CELL } from "./constants.js";
 import Virus from "./virus.js";
+import * as CONST from "./constants.js";
 
 export default class Block extends Virus{
-  constructor(row, col, color, wallColumn, sprite) {
-    super(row, color, sprite);
+  constructor(row, col, color, wallColumn) {
+    super(row, color);
     this.col = col;
     this.wallColumn = wallColumn;
+    this.sprite = CONST.BLOCK_SPRITE;
     this.init();
   }
 
@@ -13,11 +15,15 @@ export default class Block extends Virus{
     this.setClassName("block");
     this.setRow(this.row);
     this.setCol(this.col);
-    this.setStyle(this.element);
+    this.initStyle(this.element);
     this.setPrepended(this.element);
   }
 
-  setStyle(e) {
+  setSprite(s) {
+    this.sprite = s;
+  }
+
+  initStyle(e) {
     Object.assign(e.style, {
       width: `${CELL}rem`,
       height: `${CELL}rem`,
