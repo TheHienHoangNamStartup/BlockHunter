@@ -6,3 +6,15 @@
   transition: ease-in-out 0.5s;
   position: absolute;
 }
+@keyframes blink {
+  0%,
+  40%,
+  80% {
+    opacity: 0.5;
+  }
+  20%,
+  60%,
+  100% {
+    opacity: 1;
+  }
+}

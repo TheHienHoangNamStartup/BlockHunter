@@ -23,11 +23,15 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
       wallColumn.className = "wallColumn";
       wallColumn.setAttribute("col", col);
       wallColumn.style.width = `${CONST.CELL}rem`;
+
+      let lastColor = "";
       for (let row = 0; row < height; row++) {
         if (col == 0) {
           grid.push(new Block(height - row - 1, col, "#ecf0f1", wallColumn, ""));
         } else {
-          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn, CONST.BLOCK_SPRITE));
+          let colorRandom = randomColor(lastColor);
+          lastColor = colorRandom;
+          grid.push(new Block(height - row - 1, col, colorRandom, wallColumn, CONST.BLOCK_SPRITE));
         }
       }
       CONST.$(".wall").appendChild(wallColumn);
@@ -126,20 +130,20 @@ function verticalCluster(wallSelector) {
     if (flag) {
       setTimeout(() => {
         destroyArray.forEach((index) => {
-          wallColumn[index].remove();
+          removeEffect(wallColumn[index]);
         });
       }, 600);
     }
   }
 }
 
-function horizontalCluster(row, col, color) {
+function horizontalCluster(row, col, color, start = 0) {
   let isDestroy = false;
-  for (let index = col - 1; index > 0; index--) {
+  for (let index = col - start; index > 0; index--) {
     const block = CONST.$(`.block[row='${row}'][col='${index}']`);
     if (block) {
       if (block.style.backgroundColor === color) {
-        block.remove();
+        removeEffect(block);
         isDestroy = true;
       } else {
         isDestroy = false;
@@ -157,6 +161,7 @@ function horizontalCluster(row, col, color) {
 function handleBlockAction(row, col, color) {
   let blocks = CONST.$$(".block");
   let isCollision = false;
+  let isDestroy = false;
 
   blocks.forEach((block) => {
     let [checkCollision, checkSameColor] = checkCollisionAndColor(block, row, col, color);
@@ -165,7 +170,9 @@ function handleBlockAction(row, col, color) {
       isCollision = true;
 
       if (checkSameColor) {
-        block.remove();
+        removeEffect(block);
+
+        isDestroy = true;
       } else {
         let wallColumn = checkAvailableWallColumn(col);
 
@@ -175,7 +182,7 @@ function handleBlockAction(row, col, color) {
       }
     }
   });
-  return isCollision;
+  return [isCollision, isDestroy];
 }
 
 function updateBlockRow() {
@@ -183,6 +190,15 @@ function updateBlockRow() {
   blocks.forEach((block) => {
     block.setAttribute("row", `${parseInt(block.style.marginTop.slice(0, -3) / CONST.CELL)}`);
   });
+}
+
+function checkVertical(row, col, color) {
+  const block = CONST.$(`.block[row="${1 * row + 1}"][col="${1 * col + 1}"]`);
+  if (block) {
+    if (block.style.backgroundColor === color) {
+      removeEffect(block);
+    }
+  }
 }
 
 // BULLET---------------------------------------------------------------------------------------------
@@ -193,16 +209,16 @@ function handleBulletMove() {
     let currentPosition = parseInt(bullet.getMarginRight());
     bullet.setMarginRight(currentPosition);
     bullet.setCol(CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
-    let isCollision = handleBlockAction(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
+    let [isCollision, isDestroy] = handleBlockAction(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
     if (isCollision) {
       clearInterval(duration);
-      horizontalCluster(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
+      horizontalCluster(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor(), Number(isDestroy));
+      checkVertical(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
       bullet.setRemoved();
     }
   }, step);
   setTimeout(() => {
     clearInterval(duration);
-    bullet.setRemoved();
   }, step * CONST.BOARD_WIDTH);
 }
 
@@ -222,8 +238,19 @@ export function gravity() {
   }, 100);
 }
 
-function randomColor() {
+function randomColor(except = "") {
   let colorValues = Object.values(CONST.COLOR);
-  let randomIndex = Math.floor(Math.random() * colorValues.length);
+  let randomIndex;
+  do {
+    randomIndex = Math.floor(Math.random() * colorValues.length);
+  } while (colorValues[randomIndex] === except);
   return colorValues[randomIndex];
+}
+
+function removeEffect(block) {
+  const delay = 300;
+  block.style.animation = `blink ${delay}ms ease-in-out forwards`;
+  setTimeout(() => {
+    block.remove();
+  }, delay);
 }
