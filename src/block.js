@@ -15,16 +15,16 @@ export default class Block extends Virus{
     this.setClassName("block");
     this.setRow(this.row);
     this.setCol(this.col);
-    this.initStyle(this.element);
-    this.setPrepended(this.element);
+    this.initStyle();
+    this.setPrepended();
   }
 
   setSprite(s) {
     this.sprite = s;
   }
 
-  initStyle(e) {
-    Object.assign(e.style, {
+  initStyle() {
+    Object.assign(this.element.style, {
       width: `${CELL}rem`,
       height: `${CELL}rem`,
       backgroundColor: this.color,
@@ -33,8 +33,8 @@ export default class Block extends Virus{
     });
   }
 
-  setPrepended(e) {
-    this.wallColumn.prepend(e);
+  setPrepended() {
+    this.wallColumn.prepend(this.element);
   }
 
 }
