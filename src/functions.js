@@ -6,8 +6,31 @@ import Bullet from "./bullet.js";
 import * as CONST from "./constants.js";
 
 var ammunition = [];
+var wall = [];
 
-// BULLET---------------------------------------------------------------------------------------------
+// BULLET AND SHOOTING---------------------------------------------------------------------------------------------
+export function handleWeaponMoveAndShoot() {
+  document.onkeydown = (event) => {
+    if (event.key === "ArrowUp") {
+      let topEdge = 0;
+      let newPositionUp = getWeaponPosition() - 1;
+      CONST.$(".weapon").style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
+    } else if (event.key === "ArrowDown") {
+      let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
+      let newPositionDown = getWeaponPosition() + 1;
+      CONST.$(".weapon").style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
+    }
+  };
+
+  document.onkeyup = (event) => {
+    if (event.key === " " || event.key === "ArrowLeft") {
+      ammunition.push(new Bullet(getWeaponPosition(), getWeaponColor()));
+      handleBulletMove();
+      changeWeaponColor();
+    }
+  };
+}
+
 function handleBulletMove() {
   let bullet = ammunition[ammunition.length - 1];
   let step = 50;
@@ -32,48 +55,6 @@ function handleBulletMove() {
     clearInterval(duration);
     bullet.setRemoved();
   }, step * CONST.BOARD_WIDTH);
-}
-
-
-// WEAPON----------------------------------------------------------------------------------------------
-export function createWeapon() {
-  let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor());
-}
-
-export function handleWeaponMoveAndShoot() {
-  document.onkeydown = (event) => {
-    if (event.key === "ArrowUp") {
-      let topEdge = 0;
-      let newPositionUp = getWeaponPosition() - 1;
-      CONST.$(".weapon").style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
-    } else if (event.key === "ArrowDown") {
-      let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
-      let newPositionDown = getWeaponPosition() + 1;
-      CONST.$(".weapon").style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
-    }
-  };
-
-  document.onkeyup = (event) => {
-    if (event.key === " " || event.key === "ArrowLeft") {
-      ammunition.push(new Bullet(getWeaponPosition(), getWeaponColor()));
-      handleBulletMove();
-      changeWeaponColor();
-    }
-  };
-}
-
-function getWeaponPosition() {
-  return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
-}
-
-function getWeaponColor() {
-  return CONST.$(".weapon").style.backgroundColor;
-}
-
-function changeWeaponColor() {
-  let colorRandom = randomColor();
-  CONST.$(".weapon").style.backgroundColor = colorRandom;
-  CONST.$(".weapon").style.setProperty("--color", colorRandom);
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
@@ -162,6 +143,25 @@ function handleBlockAction(row, col, color, isAdd) {
     }
   });
   return [isCollision, isDestroy];
+}
+
+// WEAPON----------------------------------------------------------------------------------------------
+export function createWeapon() {
+  let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor());
+}
+
+function getWeaponPosition() {
+  return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
+}
+
+function getWeaponColor() {
+  return CONST.$(".weapon").style.backgroundColor;
+}
+
+function changeWeaponColor() {
+  let colorRandom = randomColor();
+  CONST.$(".weapon").style.backgroundColor = colorRandom;
+  CONST.$(".weapon").style.setProperty("--color", colorRandom);
 }
 
 // BOARD-----------------------------------------------------------------------------------------------
