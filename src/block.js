@@ -19,10 +19,6 @@ export default class Block extends Bloclet {
     this.setPrepended();
   }
 
-  setSprite(s) {
-    this.sprite = s;
-  }
-
   initStyle() {
     Object.assign(this.element.style, {
       width: `${CELL}rem`,
