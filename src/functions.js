@@ -6,7 +6,7 @@ import Bullet from "./bullet.js";
 import * as CONST from "./constants.js";
 
 var ammunition = [];
-var wall = [];
+var grid = [];
 
 // BULLET AND SHOOTING---------------------------------------------------------------------------------------------
 export function handleWeaponMoveAndShoot() {
@@ -58,9 +58,9 @@ function handleBulletMove() {
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
-function createBlock(row, col, color, wallColumn) {
-  let block = new Block(row, col, color, wallColumn);
-}
+// function createBlock(row, col, color, wallColumn) {
+//   let block = new Block(row, col, color, wallColumn);
+// }
 
 function createWallColumn(col) {
   let newWallColumn = document.createElement("div");
@@ -137,7 +137,7 @@ function handleBlockAction(row, col, color, isAdd) {
         let wallColumn = checkAvailableWallColumn(col);
 
         if (wallColumn) {
-          createBlock(row, parseInt(col) + 1, color, wallColumn);
+          grid.push(new Block(row, parseInt(col) + 1, color, wallColumn));
         }
       }
     }
@@ -184,7 +184,7 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
           let blockZero = new Block (height - row - 1, col, "#ecf0f1", wallColumn);
           blockZero.setSprite("");
         } else {
-          createBlock(height - row - 1, col, randomColor(), wallColumn);
+          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn));
         }
       }
       CONST.$(".wall").appendChild(wallColumn);
