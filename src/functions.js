@@ -8,7 +8,25 @@ import * as CONST from "./constants.js";
 var ammunition = [];
 var grid = [];
 
-// BULLET AND SHOOTING---------------------------------------------------------------------------------------------
+// WEAPON----------------------------------------------------------------------------------------------
+export function createWeapon() {
+  let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor());
+}
+
+function getWeaponPosition() {
+  return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
+}
+
+function getWeaponColor() {
+  return CONST.$(".weapon").style.backgroundColor;
+}
+
+function changeWeaponColor() {
+  let colorRandom = randomColor();
+  CONST.$(".weapon").style.backgroundColor = colorRandom;
+  CONST.$(".weapon").style.setProperty("--color", colorRandom);
+}
+
 export function handleWeaponMoveAndShoot() {
   document.onkeydown = (event) => {
     if (event.key === "ArrowUp") {
@@ -31,6 +49,7 @@ export function handleWeaponMoveAndShoot() {
   };
 }
 
+// BULLET---------------------------------------------------------------------------------------------
 function handleBulletMove() {
   let bullet = ammunition[ammunition.length - 1];
   let step = 50;
@@ -58,7 +77,6 @@ function handleBulletMove() {
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
-
 function createWallColumn(col) {
   let newWallColumn = document.createElement("div");
   newWallColumn.className = "wallColumn";
@@ -67,8 +85,6 @@ function createWallColumn(col) {
   CONST.$(".wall").appendChild(newWallColumn);
   return newWallColumn;
 }
-
-
 
 function checkCollisionAndColor(blockSelector, row, col, color) {
   let blockRow = (blockSelector.offsetTop / (16 * CONST.CELL) - 1).toString();
@@ -165,26 +181,6 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
       CONST.$(".wall").appendChild(wallColumn);
     }
   }
-}
-
-
-// WEAPON----------------------------------------------------------------------------------------------
-export function createWeapon() {
-  let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor());
-}
-
-function getWeaponPosition() {
-  return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
-}
-
-function getWeaponColor() {
-  return CONST.$(".weapon").style.backgroundColor;
-}
-
-function changeWeaponColor() {
-  let colorRandom = randomColor();
-  CONST.$(".weapon").style.backgroundColor = colorRandom;
-  CONST.$(".weapon").style.setProperty("--color", colorRandom);
 }
 
 // BOARD-----------------------------------------------------------------------------------------------
