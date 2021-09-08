@@ -8,23 +8,36 @@ import * as CONST from "./constants.js";
 var ammunition = [];
 var grid = [];
 
+// BOARD-----------------------------------------------------------------------------------------------
+export function createBoard(width, height, color = "#ecf0f1") {
+  let board = new Board(width, height, color);
+}
+
+// WALL------------------------------------------------------------------------------------------------
+export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
+  let wall = new Wall(width + 1, height, color);
+
+  if (createBlocks) {
+    for (let col = 0; col < blocksWidth + 1; col++) {
+      let wallColumn = document.createElement("div");
+      wallColumn.className = "wallColumn";
+      wallColumn.setAttribute("col", col);
+      wallColumn.style.width = `${CONST.CELL}rem`;
+      for (let row = 0; row < height; row++) {
+        if (col == 0) {
+          grid.push(new Block (height - row - 1, col, "#ecf0f1", wallColumn, ""));
+        } else {
+          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn, CONST.BLOCK_SPRITE));
+        }
+      }
+      CONST.$(".wall").appendChild(wallColumn);
+    }
+  }
+}
+
 // WEAPON----------------------------------------------------------------------------------------------
 export function createWeapon() {
   let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor());
-}
-
-function getWeaponPosition() {
-  return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
-}
-
-function getWeaponColor() {
-  return CONST.$(".weapon").style.backgroundColor;
-}
-
-function changeWeaponColor() {
-  let colorRandom = randomColor();
-  CONST.$(".weapon").style.backgroundColor = colorRandom;
-  CONST.$(".weapon").style.setProperty("--color", colorRandom);
 }
 
 export function handleWeaponMoveAndShoot() {
@@ -49,31 +62,18 @@ export function handleWeaponMoveAndShoot() {
   };
 }
 
-// BULLET---------------------------------------------------------------------------------------------
-function handleBulletMove() {
-  let bullet = ammunition[ammunition.length - 1];
-  let step = 50;
-  let isAdd = true;
-  let duration = setInterval(() => {
-    let currentPosition = parseInt(bullet.getMarginRight());
-    bullet.setMarginRight(currentPosition);
-    bullet.setCol(CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
-    let [isCollision, isDestroy] = handleBlockAction(
-      bullet.getRow(),
-      bullet.getCol(),
-      bullet.getBackgroundColor(),
-      isAdd
-    );
-    isAdd = !isDestroy;
-    if (isCollision && !isDestroy) {
-      clearInterval(duration);
-      bullet.setRemoved();
-    }
-  }, step);
-  setTimeout(() => {
-    clearInterval(duration);
-    bullet.setRemoved();
-  }, step * CONST.BOARD_WIDTH);
+function getWeaponPosition() {
+  return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
+}
+
+function getWeaponColor() {
+  return CONST.$(".weapon").style.backgroundColor;
+}
+
+function changeWeaponColor() {
+  let colorRandom = randomColor();
+  CONST.$(".weapon").style.backgroundColor = colorRandom;
+  CONST.$(".weapon").style.setProperty("--color", colorRandom);
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
@@ -160,31 +160,31 @@ function handleBlockAction(row, col, color, isAdd) {
   return [isCollision, isDestroy];
 }
 
-// WALL------------------------------------------------------------------------------------------------
-export function createWall(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
-  let wall = new Wall(width + 1, height, color);
-
-  if (createBlocks) {
-    for (let col = 0; col < blocksWidth + 1; col++) {
-      let wallColumn = document.createElement("div");
-      wallColumn.className = "wallColumn";
-      wallColumn.setAttribute("col", col);
-      wallColumn.style.width = `${CONST.CELL}rem`;
-      for (let row = 0; row < height; row++) {
-        if (col == 0) {
-          grid.push(new Block (height - row - 1, col, "#ecf0f1", wallColumn, ""));
-        } else {
-          grid.push(new Block(height - row - 1, col, randomColor(), wallColumn, CONST.BLOCK_SPRITE));
-        }
-      }
-      CONST.$(".wall").appendChild(wallColumn);
+// BULLET---------------------------------------------------------------------------------------------
+function handleBulletMove() {
+  let bullet = ammunition[ammunition.length - 1];
+  let step = 50;
+  let isAdd = true;
+  let duration = setInterval(() => {
+    let currentPosition = parseInt(bullet.getMarginRight());
+    bullet.setMarginRight(currentPosition);
+    bullet.setCol(CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
+    let [isCollision, isDestroy] = handleBlockAction(
+      bullet.getRow(),
+      bullet.getCol(),
+      bullet.getBackgroundColor(),
+      isAdd
+    );
+    isAdd = !isDestroy;
+    if (isCollision && !isDestroy) {
+      clearInterval(duration);
+      bullet.setRemoved();
     }
-  }
-}
-
-// BOARD-----------------------------------------------------------------------------------------------
-export function createBoard(width, height, color = "#ecf0f1") {
-  let board = new Board(width, height, color);
+  }, step);
+  setTimeout(() => {
+    clearInterval(duration);
+    bullet.setRemoved();
+  }, step * CONST.BOARD_WIDTH);
 }
 
 // OTHER----------------------------------------------------------------------------------------------
