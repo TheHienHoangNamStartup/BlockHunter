@@ -6,25 +6,36 @@ export default class Weapon {
     this.height = height;
     this.color = color;
     // this.sprite = sprite;
-    this.draw();
+    this.element = document.createElement("div");
+    this.init();
   }
 
-  draw() {
-    let weapon = document.createElement("div");
-    weapon.className = "weapon";
+  init() {
+    this.setClassName();
+    this.initStyle();
+    this.setAppended();
+  }
 
-    weapon.style.setProperty("--width", `${(BOARD_WIDTH - 3) * CELL}rem`);
-    weapon.style.setProperty("--color", this.color);
-    weapon.style.setProperty("--margin", `${CELL}rem`);
+  setClassName() {
+    this.element.className = "weapon";
+  }
 
-    Object.assign(weapon.style, {
+  initStyle() {
+    this.element.style.setProperty("--width", `${(BOARD_WIDTH - 3) * CELL}rem`);
+    this.element.style.setProperty("--color", this.color);
+    this.element.style.setProperty("--margin", `${CELL}rem`);
+
+    Object.assign(this.element.style, {
       width: `${this.width * CELL}rem`,
       height: `${this.height * CELL}rem`,
       backgroundColor: this.color,
       // backgroundImage: `url(${this.sprite})`,
       marginTop: `0rem`,
     });
-
-    $(".board").appendChild(weapon);
   }
+
+  setAppended() {
+    $(".board").appendChild(this.element);
+  }
+
 }

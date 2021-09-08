@@ -68,6 +68,8 @@ function createWallColumn(col) {
   return newWallColumn;
 }
 
+
+
 function checkCollisionAndColor(blockSelector, row, col, color) {
   let blockRow = (blockSelector.offsetTop / (16 * CONST.CELL) - 1).toString();
   let isCollision = false;
@@ -128,7 +130,7 @@ function handleBlockAction(row, col, color, isAdd) {
       isCollision = true;
 
       if (checkSameColor) {
-        block.setRemoved();
+        block.remove();
         isDestroy = true;
       } else if (isAdd) {
         let wallColumn = checkAvailableWallColumn(col);
