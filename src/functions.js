@@ -41,7 +41,7 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
 
 // WEAPON----------------------------------------------------------------------------------------------
 export function createWeapon() {
-  let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor());
+  let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor(), randomColor());
 }
 
 export function handleWeaponMoveAndShoot() {
@@ -74,10 +74,16 @@ function getWeaponColor() {
   return CONST.$(".weapon").style.backgroundColor;
 }
 
+function getWeaponNextColor() {
+  return CONST.$(".weapon").style.getPropertyValue("--nextColor");
+}
+
 function changeWeaponColor() {
-  let colorRandom = randomColor();
-  CONST.$(".weapon").style.backgroundColor = colorRandom;
-  CONST.$(".weapon").style.setProperty("--color", colorRandom);
+  let color = getWeaponNextColor();
+  let nextColor = randomColor();
+  CONST.$(".weapon").style.backgroundColor = color;
+  CONST.$(".weapon").style.setProperty("--color", color);
+  CONST.$(".weapon").style.setProperty("--nextColor", nextColor);
 }
 
 // BLOCK----------------------------------------------------------------------------------------------

@@ -1,10 +1,11 @@
 import { $, CELL, BOARD_WIDTH } from "./constants.js";
 
 export default class Weapon {
-  constructor(width, height, color) {
+  constructor(width, height, color, nextColor) {
     this.width = width;
     this.height = height;
     this.color = color;
+    this.nextColor = nextColor;
     // this.sprite = sprite;
     this.element = document.createElement("div");
     this.init();
@@ -22,8 +23,9 @@ export default class Weapon {
 
   initStyle() {
     this.element.style.setProperty("--width", `${(BOARD_WIDTH - 3) * CELL}rem`);
-    this.element.style.setProperty("--color", this.color);
     this.element.style.setProperty("--margin", `${CELL}rem`);
+    this.element.style.setProperty("--color", this.color);
+    this.element.style.setProperty("--nextColor", this.nextColor);
 
     Object.assign(this.element.style, {
       width: `${this.width * CELL}rem`,
@@ -37,5 +39,4 @@ export default class Weapon {
   setAppended() {
     $(".board").appendChild(this.element);
   }
-
 }

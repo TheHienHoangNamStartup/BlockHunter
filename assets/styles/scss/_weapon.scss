@@ -1,6 +1,6 @@
 .weapon {
   border-radius: 0.5rem;
-  transition: margin ease-out 0.3s, background ease-out 1s;
+  transition: margin ease-out 0.3s, background-color ease-out 1s;
   position: relative;
 
   &::before {
@@ -12,5 +12,19 @@
     right: var(--margin);
     transform: translateY(-50%);
     opacity: 0.2;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%);
+    border-radius: 50%;
+    background-color: var(--nextColor);
+    box-shadow: 0 0 0 0.2rem #ecf0f1;
+    transition: background-color ease-out 1s;
   }
 }
