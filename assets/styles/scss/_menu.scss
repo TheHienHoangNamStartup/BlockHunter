@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
+.menu {
+  font-family: "Luckiest Guy", cursive;
+  width: 100%;
+  height: 100%;
+  background-color: #0003;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  overflow: hidden;
+
+  &__container {
+    text-align: center;
+  }
+
+  &__item {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    color: #7f8c8d;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0 1px 3px -1px;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+
+    &:nth-child(1):hover {
+      background-color: #ea4d4b;
+    }
+
+    &:nth-child(2):hover {
+      background-color: #6aaf4c;
+    }
+
+    &:nth-child(3):hover {
+      background-color: #686ddf;
+    }
+
+    &:nth-child(4):hover {
+      background-color: #f09733;
+    }
+
+    &:nth-child(1),
+    &:nth-child(3) {
+      animation: slideToRight 1s ease-out forwards;
+    }
+
+    &:nth-child(2),
+    &:nth-child(4) {
+      animation: slideToLeft 1s ease-out forwards;
+    }
+  }
+}
+
+@keyframes slideToRight {
+  from {
+    opacity: 0;
+    transform: translateX(-200%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideToLeft {
+  from {
+    opacity: 0;
+    transform: translateX(200%);
+  }
+  to {
+    opacity: 1;
+
+    transform: translateX(0%);
+  }
+}
+
+@keyframes hideToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(200%);
+  }
+}
+
+@keyframes hideToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-200%);
+  }
+}

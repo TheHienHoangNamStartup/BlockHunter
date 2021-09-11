@@ -1,15 +1,6 @@
-import * as CONST from "./constants.js";
-import * as FUNC from "./functions.js";
+import { createMenu } from "./menu.js";
+import { createBoard } from "./functions.js";
+import { BOARD_WIDTH, BOARD_HEIGHT } from "./constants.js";
 
-function gameControl() {
-  FUNC.createBoard(CONST.BOARD_WIDTH, CONST.BOARD_HEIGHT);
-
-  FUNC.createWall(CONST.WALL_WIDTH, CONST.WALL_HEIGHT, true, CONST.BLOCKS_WIDTH);
-
-  FUNC.createWeapon();
-  FUNC.handleWeaponMoveAndShoot();
-
-  FUNC.gravity();
-}
-
-gameControl();
+createBoard(BOARD_WIDTH, BOARD_HEIGHT);
+createMenu();

@@ -62,6 +62,8 @@ export function handleWeaponMoveAndShoot() {
       ammunition.push(new Bullet(getWeaponPosition(), getWeaponColor()));
       handleBulletMove();
       changeWeaponColor();
+    } else if (event.key === "ArrowRight") {
+      changeWeaponColor();
     }
   };
 }
@@ -223,9 +225,6 @@ function handleBulletMove() {
       bullet.setRemoved();
     }
   }, step);
-  setTimeout(() => {
-    clearInterval(duration);
-  }, step * CONST.BOARD_WIDTH);
 }
 
 // OTHER----------------------------------------------------------------------------------------------
@@ -240,6 +239,7 @@ export function gravity() {
       });
       updateBlockRow();
       verticalCluster(wall[i]);
+      checkWin();
     }
   }, 100);
 }
@@ -259,4 +259,17 @@ function removeEffect(block) {
   setTimeout(() => {
     block.remove();
   }, delay);
+}
+
+function checkWin() {
+  const blocks = Array.from(CONST.$$(".block"));
+  let countBlocks = 0;
+  blocks.forEach((block) => {
+    if (block.style.backgroundColor !== "rgb(236, 240, 241)") {
+      countBlocks++;
+    }
+  });
+  if (countBlocks === 0) {
+    alert("You won!");
+  }
 }
