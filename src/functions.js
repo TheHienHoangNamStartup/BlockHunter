@@ -40,27 +40,23 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
 }
 
 // WEAPON----------------------------------------------------------------------------------------------
-export function createWeapon() {
-  let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor(), randomColor());
-  return weapon;
-}
 
 export function handleWeaponMoveAndShoot() {
   document.onkeydown = (event) => {
     if (event.key === "ArrowUp") {
       let topEdge = 0;
-      let newPositionUp = weapon.getPosition() - 1;
+      let newPositionUp = VAR.weapon.getPosition() - 1;
       CONST.$(".weapon").style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
     } else if (event.key === "ArrowDown") {
       let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
-      let newPositionDown = weapon.getPosition() + 1;
+      let newPositionDown = VAR.weapon.getPosition() + 1;
       CONST.$(".weapon").style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
     }
   };
 
   document.onkeyup = (event) => {
     if (event.key === " " || event.key === "ArrowLeft") {
-      VAR.ammunition.push(new Bullet(weapon.getPosition(), getWeaponColor()));
+      VAR.ammunition.push(new Bullet(VAR.weapon.getPosition(), getWeaponColor()));
       handleBulletMove();
       changeWeaponColor();
     } else if (event.key === "ArrowRight") {
@@ -68,10 +64,6 @@ export function handleWeaponMoveAndShoot() {
     }
   };
 }
-
-// function weapon.getPosition() {
-//   return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
-// }
 
 function getWeaponColor() {
   return CONST.$(".weapon").style.backgroundColor;
