@@ -5,7 +5,7 @@ import {weapon} from "./constants-and-variables.js";
 function startGame() {
   FUNC.createWall(CONST.WALL_WIDTH, CONST.WALL_HEIGHT, true, CONST.BLOCKS_WIDTH);
 
-  weapon.setVisible();
+  // weapon.setVisible();
   weapon.setAppended();
   FUNC.handleWeaponMoveAndShoot();
 

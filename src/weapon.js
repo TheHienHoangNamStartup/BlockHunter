@@ -40,11 +40,11 @@ export default class Weapon {
   }
 
   setHidden() {
-    this.element.style.visibility = "hidden";
+    this.element.style.display = "none";
   }
 
   setVisible() {
-    this.element.style.visibility = "visible";
+    this.element.style.display = "block";
   }
 
   getPosition() {
