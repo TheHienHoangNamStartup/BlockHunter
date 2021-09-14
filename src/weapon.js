@@ -3,11 +3,11 @@ import * as CONST from "./constants-and-variables.js";
 import * as FUNC from "./functions.js";
 
 export default class Weapon {
-  constructor(width, height, color, nextColor) {
+  constructor(width, height, color) {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.nextColor = nextColor;
+    this.nextColor = FUNC.randomColor();
     // this.sprite = sprite;
     this.element = document.createElement("div");
     this.init();
