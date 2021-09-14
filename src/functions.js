@@ -42,24 +42,25 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
 // WEAPON----------------------------------------------------------------------------------------------
 export function createWeapon() {
   let weapon = new Weapon(CONST.WEAPON_WIDTH, CONST.WEAPON_HEIGHT, randomColor(), randomColor());
+  return weapon;
 }
 
 export function handleWeaponMoveAndShoot() {
   document.onkeydown = (event) => {
     if (event.key === "ArrowUp") {
       let topEdge = 0;
-      let newPositionUp = getWeaponPosition() - 1;
+      let newPositionUp = weapon.getPosition() - 1;
       CONST.$(".weapon").style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
     } else if (event.key === "ArrowDown") {
       let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
-      let newPositionDown = getWeaponPosition() + 1;
+      let newPositionDown = weapon.getPosition() + 1;
       CONST.$(".weapon").style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
     }
   };
 
   document.onkeyup = (event) => {
     if (event.key === " " || event.key === "ArrowLeft") {
-      VAR.ammunition.push(new Bullet(getWeaponPosition(), getWeaponColor()));
+      VAR.ammunition.push(new Bullet(weapon.getPosition(), getWeaponColor()));
       handleBulletMove();
       changeWeaponColor();
     } else if (event.key === "ArrowRight") {
@@ -68,9 +69,9 @@ export function handleWeaponMoveAndShoot() {
   };
 }
 
-function getWeaponPosition() {
-  return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
-}
+// function weapon.getPosition() {
+//   return parseInt(CONST.$(".weapon").style.marginTop.slice(0, -3)) / CONST.CELL; // return row
+// }
 
 function getWeaponColor() {
   return CONST.$(".weapon").style.backgroundColor;
@@ -244,7 +245,7 @@ export function gravity() {
   }, 100);
 }
 
-function randomColor(except = "") {
+export function randomColor(except = "") {
   let colorValues = Object.values(CONST.COLOR);
   let randomIndex;
   do {

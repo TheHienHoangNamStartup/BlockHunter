@@ -1,3 +1,6 @@
+import * as FUNC from "./functions.js";
+import Weapon from "./weapon.js";
+
 export const $ = document.querySelector.bind(document);
 export const $$ = document.querySelectorAll.bind(document);
 
@@ -26,5 +29,7 @@ export const COLOR = {
   purple: "rgb(155, 89, 182)",
 };
 
-export var ammunition = [];
-export var grid = [];
+export var ammunition = []; // ammunition is an array of bullets
+export var grid = []; // grid is an array of blocks
+export var weapon = new Weapon(WEAPON_WIDTH, WEAPON_HEIGHT, FUNC.randomColor(), FUNC.randomColor());
+weapon.setHidden();

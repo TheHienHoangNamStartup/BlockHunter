@@ -1,4 +1,5 @@
 import { $, CELL, BOARD_WIDTH } from "./constants-and-variables.js";
+import * as CONST from "./constants-and-variables.js";
 
 export default class Weapon {
   constructor(width, height, color, nextColor) {
@@ -14,7 +15,6 @@ export default class Weapon {
   init() {
     this.setClassName();
     this.initStyle();
-    this.setAppended();
   }
 
   setClassName() {
@@ -38,5 +38,21 @@ export default class Weapon {
 
   setAppended() {
     $(".board").appendChild(this.element);
+  }
+
+  getPosition() {
+    return parseInt(this.element.style.marginTop.slice(0, -3)) / CONST.CELL; // return row
+  }
+
+  setHidden() {
+    this.element.style.visibility = "hidden";
+  }
+
+  setVisible() {
+    this.element.style.visibility = "visible";
+  }
+
+  moveUp() {
+
   }
 }
