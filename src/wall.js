@@ -19,6 +19,6 @@ export default class Wall {
       marginLeft: `-${CELL}rem`,
     });
 
-    $(".board").appendChild(wall);
+    $(".wrapper").appendChild(wall);
   }
 }

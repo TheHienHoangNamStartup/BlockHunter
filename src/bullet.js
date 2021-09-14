@@ -37,7 +37,7 @@ export default class Bullet extends Bloclet {
   }
 
   setAppended() {
-    $(".board").appendChild(this.element);
+    $(".wrapper").appendChild(this.element);
   }
 
 }

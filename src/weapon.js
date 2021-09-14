@@ -1,4 +1,4 @@
-import { $, CELL, BOARD_WIDTH } from "./constants-and-variables.js";
+import { $, CELL, WRAPPER_WIDTH } from "./constants-and-variables.js";
 import * as CONST from "./constants-and-variables.js";
 import * as FUNC from "./functions.js";
 
@@ -24,7 +24,7 @@ export default class Weapon {
   }
 
   initStyle() {
-    this.element.style.setProperty("--width", `${(BOARD_WIDTH - 3) * CELL}rem`);
+    this.element.style.setProperty("--width", `${(WRAPPER_WIDTH - 3) * CELL}rem`);
     this.element.style.setProperty("--margin", `${CELL}rem`);
 
     Object.assign(this.element.style, {
@@ -36,7 +36,7 @@ export default class Weapon {
   }
 
   setAppended() {
-    $(".board").appendChild(this.element);
+    $(".wrapper").appendChild(this.element);
   }
 
   setHidden() {
@@ -58,7 +58,7 @@ export default class Weapon {
   }
 
   moveDown() {
-    let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
+    let bottomEdge = CONST.WRAPPER_HEIGHT - CONST.WEAPON_HEIGHT - 2;
     let newPositionDown = this.getPosition() + 1;
     this.element.style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
   }

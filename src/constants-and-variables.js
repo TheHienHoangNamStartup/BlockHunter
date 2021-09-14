@@ -6,8 +6,8 @@ export const $$ = document.querySelectorAll.bind(document);
 
 export const CELL = 2;
 
-export const BOARD_WIDTH = 22;
-export const BOARD_HEIGHT = 17;
+export const WRAPPER_WIDTH = 22;
+export const WRAPPER_HEIGHT = 17;
 
 export const WALL_WIDTH = 10;
 export const WALL_HEIGHT = 15;

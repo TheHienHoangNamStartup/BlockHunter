@@ -1,7 +1,7 @@
 import { createMenu } from "./menu.js";
 import { createBoard } from "./functions.js";
-import { BOARD_WIDTH, BOARD_HEIGHT } from "./constants-and-variables.js";
+import { WRAPPER_WIDTH, WRAPPER_HEIGHT } from "./constants-and-variables.js";
 import * as VAR from "./constants-and-variables.js";
 
-createBoard(BOARD_WIDTH, BOARD_HEIGHT);
+createBoard(WRAPPER_WIDTH, WRAPPER_HEIGHT);
 createMenu();

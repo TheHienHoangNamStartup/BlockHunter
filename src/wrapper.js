@@ -1,6 +1,6 @@
 import { $, CELL } from "./constants-and-variables.js";
 
-export default class Board {
+export default class Wrapper {
   constructor(width, height, color) {
     this.width = width;
     this.height = height;
@@ -9,16 +9,16 @@ export default class Board {
   }
 
   draw() {
-    let board = document.createElement("div");
-    board.className = "board";
+    let wrapper = document.createElement("div");
+    wrapper.className = "wrapper";
 
-    Object.assign(board.style, {
+    Object.assign(wrapper.style, {
       width: `${this.width * CELL}rem`,
       height: `${this.height * CELL}rem`,
       backgroundColor: this.color,
       padding: `${CELL}rem`,
     });
 
-    $("body").appendChild(board);
+    $("body").appendChild(wrapper);
   }
 }

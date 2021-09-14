@@ -1,4 +1,4 @@
-import Board from "./board.js";
+import Board from "./wrapper.js";
 import Wall from "./wall.js";
 import Block from "./block.js";
 import Weapon from "./weapon.js";
@@ -8,9 +8,9 @@ import {weapon, grid, ammunition} from "./constants-and-variables.js";
 
 
 
-// BOARD-----------------------------------------------------------------------------------------------
+// WRAPPER-----------------------------------------------------------------------------------------------
 export function createBoard(width, height, color = "#ecf0f1") {
-  let board = new Board(width, height, color);
+  let wrapper = new Board(width, height, color);
 }
 
 // WALL------------------------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ function handleBulletMove() {
   let duration = setInterval(() => {
     let currentPosition = parseInt(bullet.getMarginRight());
     bullet.setMarginRight(currentPosition);
-    bullet.setCol(CONST.BOARD_WIDTH - 2 - currentPosition / CONST.CELL);
+    bullet.setCol(CONST.WRAPPER_WIDTH - 2 - currentPosition / CONST.CELL);
     let [isCollision, isDestroy] = handleBlockAction(bullet.getRow(), bullet.getCol(), bullet.getBackgroundColor());
     if (isCollision) {
       clearInterval(duration);

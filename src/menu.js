@@ -26,7 +26,7 @@ export function createMenu() {
     menuContainer.appendChild(menuItem);
   });
   menu.appendChild(menuContainer);
-  CONST.$(".board").appendChild(menu);
+  CONST.$(".wrapper").appendChild(menu);
 
   handleMenuAction();
 }
