@@ -44,9 +44,7 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
 export function handleWeaponMoveAndShoot() {
   document.onkeydown = (event) => {
     if (event.key === "ArrowUp") {
-      let topEdge = 0;
-      let newPositionUp = VAR.weapon.getPosition() - 1;
-      CONST.$(".weapon").style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
+      VAR.weapon.moveUp();
     } else if (event.key === "ArrowDown") {
       let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
       let newPositionDown = VAR.weapon.getPosition() + 1;

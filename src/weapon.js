@@ -57,6 +57,8 @@ export default class Weapon {
   }
 
   moveUp() {
-
+    let topEdge = 0;
+    let newPositionUp = this.getPosition() - 1;
+    this.element.style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
   }
 }
