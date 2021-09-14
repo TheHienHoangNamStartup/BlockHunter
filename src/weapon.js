@@ -51,15 +51,6 @@ export default class Weapon {
     return parseInt(this.element.style.marginTop.slice(0, -3)) / CONST.CELL; // return row
   }
 
-  getColor() {
-    return this.color;
-  }
-
-  activateColors() {
-    this.element.style.backgroundColor = this.color;
-    this.element.style.setProperty("--nextColor", this.nextColor);
-  }
-
   moveUp() {
     let topEdge = 0;
     let newPositionUp = this.getPosition() - 1;
@@ -70,6 +61,16 @@ export default class Weapon {
     let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
     let newPositionDown = this.getPosition() + 1;
     this.element.style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
+  }
+
+  getColor() {
+    return this.color;
+  }
+
+  activateColors() {
+    this.element.style.backgroundColor = this.color;
+    this.element.style.setProperty("--nextColor", this.nextColor);
+    this.element.style.setProperty("--color", this.color);
   }
 
   changeColors() {
