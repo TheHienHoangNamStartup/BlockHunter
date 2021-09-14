@@ -3,10 +3,10 @@ import Bloclet from "./bloclet.js";
 import * as CONST from "./constants-and-variables.js";
 
 export default class Block extends Bloclet {
-  constructor(row, col, color, wallColumn, sprite) {
+  constructor(row, col, color, boardColumn, sprite) {
     super(row, color);
     this.col = col;
-    this.wallColumn = wallColumn;
+    this.boardColumn = boardColumn;
     this.sprite = sprite;
     this.init();
   }
@@ -30,7 +30,7 @@ export default class Block extends Bloclet {
   }
 
   setPrepended() {
-    this.wallColumn.prepend(this.element);
+    this.boardColumn.prepend(this.element);
   }
 
 }

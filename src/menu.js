@@ -3,12 +3,9 @@ import * as FUNC from "./functions.js";
 import {weapon} from "./constants-and-variables.js";
 
 function startGame() {
-  FUNC.createWall(CONST.WALL_WIDTH, CONST.WALL_HEIGHT, true, CONST.BLOCKS_WIDTH);
-
-  // weapon.setVisible();
+  FUNC.createBoard(CONST.BOARD_WIDTH, CONST.BOARD_HEIGHT, true, CONST.BLOCKS_WIDTH);
   weapon.setAppended();
   FUNC.handleWeaponMoveAndShoot();
-
   FUNC.gravity();
 }
 

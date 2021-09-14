@@ -9,8 +9,8 @@ export const CELL = 2;
 export const WRAPPER_WIDTH = 22;
 export const WRAPPER_HEIGHT = 17;
 
-export const WALL_WIDTH = 10;
-export const WALL_HEIGHT = 15;
+export const BOARD_WIDTH = 10;
+export const BOARD_HEIGHT = 15;
 
 export const BLOCKS_WIDTH = 5;
 

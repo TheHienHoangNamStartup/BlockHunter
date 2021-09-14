@@ -1,11 +1,11 @@
-.wall {
+.board {
   display: flex;
   flex-wrap: wrap;
   border-radius: 0.5rem;
   align-self: center;
 }
 
-.wallColumn {
+.boardColumn {
   display: flex;
   flex-direction: column;
 }
