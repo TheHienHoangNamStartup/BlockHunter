@@ -61,4 +61,10 @@ export default class Weapon {
     let newPositionUp = this.getPosition() - 1;
     this.element.style.marginTop = `${Math.max(topEdge, newPositionUp) * CONST.CELL}rem`;
   }
+
+  moveDown() {
+    let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
+    let newPositionDown = this.getPosition() + 1;
+    this.element.style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
+  }
 }

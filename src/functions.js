@@ -46,9 +46,7 @@ export function handleWeaponMoveAndShoot() {
     if (event.key === "ArrowUp") {
       VAR.weapon.moveUp();
     } else if (event.key === "ArrowDown") {
-      let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
-      let newPositionDown = VAR.weapon.getPosition() + 1;
-      CONST.$(".weapon").style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
+      VAR.weapon.moveDown();
     }
   };
 
