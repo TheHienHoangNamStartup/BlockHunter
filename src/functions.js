@@ -4,7 +4,7 @@ import Block from "./block.js";
 import Weapon from "./weapon.js";
 import Bullet from "./bullet.js";
 import * as CONST from "./constants-and-variables.js";
-import {weapon, grid, ammunition} from "./constants-and-variables.js";
+import {weapon, wall, ammunition} from "./constants-and-variables.js";
 
 
 
@@ -27,11 +27,11 @@ export function createBoard(width, height, createBlocks = true, blocksWidth = 1,
       let lastColor = "";
       for (let row = 0; row < height; row++) {
         if (col == 0) {
-          grid.push(new Block(height - row - 1, col, "#ecf0f1", boardColumn, ""));
+          wall.push(new Block(height - row - 1, col, "#ecf0f1", boardColumn, ""));
         } else {
           let colorRandom = randomColor(lastColor);
           lastColor = colorRandom;
-          grid.push(new Block(height - row - 1, col, colorRandom, boardColumn, CONST.BLOCK_SPRITE));
+          wall.push(new Block(height - row - 1, col, colorRandom, boardColumn, CONST.BLOCK_SPRITE));
         }
       }
       CONST.$(".board").appendChild(boardColumn);
@@ -157,7 +157,7 @@ function handleBlockAction(row, col, color) {
         let boardColumn = checkAvailableBoardColumn(col);
 
         if (boardColumn) {
-          grid.push(new Block(row, parseInt(col) + 1, color, boardColumn, CONST.BLOCK_SPRITE));
+          wall.push(new Block(row, parseInt(col) + 1, color, boardColumn, CONST.BLOCK_SPRITE));
         }
       }
     }
