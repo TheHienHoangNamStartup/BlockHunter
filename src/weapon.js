@@ -1,5 +1,6 @@
 import { $, CELL, BOARD_WIDTH } from "./constants-and-variables.js";
 import * as CONST from "./constants-and-variables.js";
+import * as FUNC from "./functions.js";
 
 export default class Weapon {
   constructor(width, height, color, nextColor) {
@@ -15,6 +16,7 @@ export default class Weapon {
   init() {
     this.setClassName();
     this.initStyle();
+    this.activateColors();
   }
 
   setClassName() {
@@ -24,13 +26,10 @@ export default class Weapon {
   initStyle() {
     this.element.style.setProperty("--width", `${(BOARD_WIDTH - 3) * CELL}rem`);
     this.element.style.setProperty("--margin", `${CELL}rem`);
-    this.element.style.setProperty("--color", this.color);
-    this.element.style.setProperty("--nextColor", this.nextColor);
 
     Object.assign(this.element.style, {
       width: `${this.width * CELL}rem`,
       height: `${this.height * CELL}rem`,
-      backgroundColor: this.color,
       // backgroundImage: `url(${this.sprite})`,
       marginTop: `0rem`,
     });
@@ -53,7 +52,12 @@ export default class Weapon {
   }
 
   getColor() {
-    return this.element.style.backgroundColor;
+    return this.color;
+  }
+
+  activateColors() {
+    this.element.style.backgroundColor = this.color;
+    this.element.style.setProperty("--nextColor", this.nextColor);
   }
 
   moveUp() {
@@ -66,5 +70,11 @@ export default class Weapon {
     let bottomEdge = CONST.BOARD_HEIGHT - CONST.WEAPON_HEIGHT - 2;
     let newPositionDown = this.getPosition() + 1;
     this.element.style.marginTop = `${Math.min(bottomEdge, newPositionDown) * CONST.CELL}rem`;
+  }
+
+  changeColors() {
+    this.color = this.nextColor;
+    this.nextColor = FUNC.randomColor();
+    this.activateColors();
   }
 }

@@ -40,7 +40,6 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
 }
 
 // WEAPON----------------------------------------------------------------------------------------------
-
 export function handleWeaponMoveAndShoot() {
   document.onkeydown = (event) => {
     if (event.key === "ArrowUp") {
@@ -54,23 +53,11 @@ export function handleWeaponMoveAndShoot() {
     if (event.key === " " || event.key === "ArrowLeft") {
       VAR.ammunition.push(new Bullet(VAR.weapon.getPosition(), VAR.weapon.getColor()));
       handleBulletMove();
-      changeWeaponColor();
+      VAR.weapon.changeColors();
     } else if (event.key === "ArrowRight") {
-      changeWeaponColor();
+      VAR.weapon.changeColors();
     }
   };
-}
-
-function getWeaponNextColor() {
-  return CONST.$(".weapon").style.getPropertyValue("--nextColor");
-}
-
-function changeWeaponColor() {
-  let color = getWeaponNextColor();
-  let nextColor = randomColor();
-  CONST.$(".weapon").style.backgroundColor = color;
-  CONST.$(".weapon").style.setProperty("--color", color);
-  CONST.$(".weapon").style.setProperty("--nextColor", nextColor);
 }
 
 // BLOCK----------------------------------------------------------------------------------------------
