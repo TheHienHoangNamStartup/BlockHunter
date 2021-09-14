@@ -56,17 +56,13 @@ export function handleWeaponMoveAndShoot() {
 
   document.onkeyup = (event) => {
     if (event.key === " " || event.key === "ArrowLeft") {
-      VAR.ammunition.push(new Bullet(VAR.weapon.getPosition(), getWeaponColor()));
+      VAR.ammunition.push(new Bullet(VAR.weapon.getPosition(), VAR.weapon.getColor()));
       handleBulletMove();
       changeWeaponColor();
     } else if (event.key === "ArrowRight") {
       changeWeaponColor();
     }
   };
-}
-
-function getWeaponColor() {
-  return CONST.$(".weapon").style.backgroundColor;
 }
 
 function getWeaponNextColor() {

@@ -40,16 +40,20 @@ export default class Weapon {
     $(".board").appendChild(this.element);
   }
 
-  getPosition() {
-    return parseInt(this.element.style.marginTop.slice(0, -3)) / CONST.CELL; // return row
-  }
-
   setHidden() {
     this.element.style.visibility = "hidden";
   }
 
   setVisible() {
     this.element.style.visibility = "visible";
+  }
+
+  getPosition() {
+    return parseInt(this.element.style.marginTop.slice(0, -3)) / CONST.CELL; // return row
+  }
+
+  getColor() {
+    return this.element.style.backgroundColor;
   }
 
   moveUp() {
