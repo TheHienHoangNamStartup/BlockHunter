@@ -1,4 +1,4 @@
-import * as CONST from "./constants.js";
+import * as CONST from "./constants-and-variables.js";
 import * as FUNC from "./functions.js";
 
 function startGame() {

@@ -25,3 +25,6 @@ export const COLOR = {
   green: "rgb(46, 204, 113)",
   purple: "rgb(155, 89, 182)",
 };
+
+export var ammunition = [];
+export var grid = [];

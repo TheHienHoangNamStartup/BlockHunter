@@ -1,4 +1,4 @@
-import { $, CELL, BOARD_WIDTH } from "./constants.js";
+import { $, CELL, BOARD_WIDTH } from "./constants-and-variables.js";
 
 export default class Weapon {
   constructor(width, height, color, nextColor) {

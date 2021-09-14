@@ -3,10 +3,10 @@ import Wall from "./wall.js";
 import Block from "./block.js";
 import Weapon from "./weapon.js";
 import Bullet from "./bullet.js";
-import * as CONST from "./constants.js";
+import * as CONST from "./constants-and-variables.js";
+import * as VAR from "./constants-and-variables.js";
 
-var ammunition = [];
-var grid = [];
+
 
 // BOARD-----------------------------------------------------------------------------------------------
 export function createBoard(width, height, color = "#ecf0f1") {
@@ -27,11 +27,11 @@ export function createWall(width, height, createBlocks = true, blocksWidth = 1, 
       let lastColor = "";
       for (let row = 0; row < height; row++) {
         if (col == 0) {
-          grid.push(new Block(height - row - 1, col, "#ecf0f1", wallColumn, ""));
+          VAR.grid.push(new Block(height - row - 1, col, "#ecf0f1", wallColumn, ""));
         } else {
           let colorRandom = randomColor(lastColor);
           lastColor = colorRandom;
-          grid.push(new Block(height - row - 1, col, colorRandom, wallColumn, CONST.BLOCK_SPRITE));
+          VAR.grid.push(new Block(height - row - 1, col, colorRandom, wallColumn, CONST.BLOCK_SPRITE));
         }
       }
       CONST.$(".wall").appendChild(wallColumn);
@@ -59,7 +59,7 @@ export function handleWeaponMoveAndShoot() {
 
   document.onkeyup = (event) => {
     if (event.key === " " || event.key === "ArrowLeft") {
-      ammunition.push(new Bullet(getWeaponPosition(), getWeaponColor()));
+      VAR.ammunition.push(new Bullet(getWeaponPosition(), getWeaponColor()));
       handleBulletMove();
       changeWeaponColor();
     } else if (event.key === "ArrowRight") {
@@ -185,7 +185,7 @@ function handleBlockAction(row, col, color) {
         let wallColumn = checkAvailableWallColumn(col);
 
         if (wallColumn) {
-          grid.push(new Block(row, parseInt(col) + 1, color, wallColumn, CONST.BLOCK_SPRITE));
+          VAR.grid.push(new Block(row, parseInt(col) + 1, color, wallColumn, CONST.BLOCK_SPRITE));
         }
       }
     }
@@ -211,7 +211,7 @@ function updateBlockRow() {
 
 // BULLET---------------------------------------------------------------------------------------------
 function handleBulletMove() {
-  let bullet = ammunition[ammunition.length - 1];
+  let bullet = VAR.ammunition[VAR.ammunition.length - 1];
   let step = 50;
   let duration = setInterval(() => {
     let currentPosition = parseInt(bullet.getMarginRight());

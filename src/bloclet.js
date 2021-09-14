@@ -1,5 +1,5 @@
-import { $, CELL } from "./constants.js";
-import * as CONST from "./constants.js";
+import { $, CELL } from "./constants-and-variables.js";
+import * as CONST from "./constants-and-variables.js";
 
 export default class Bloclet {
   constructor(row, color) {

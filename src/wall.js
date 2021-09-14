@@ -1,4 +1,4 @@
-import { $, CELL } from "./constants.js";
+import { $, CELL } from "./constants-and-variables.js";
 
 export default class Wall {
   constructor(width, height, color) {

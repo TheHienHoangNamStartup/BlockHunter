@@ -1,6 +1,6 @@
-import { $, CELL } from "./constants.js";
+import { $, CELL } from "./constants-and-variables.js";
 import Bloclet from "./bloclet.js";
-import * as CONST from "./constants.js";
+import * as CONST from "./constants-and-variables.js";
 
 export default class Block extends Bloclet {
   constructor(row, col, color, wallColumn, sprite) {
