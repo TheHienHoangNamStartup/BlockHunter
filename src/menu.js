@@ -1,12 +1,12 @@
 import * as CONST from "./constants-and-variables.js";
 import * as FUNC from "./functions.js";
-import * as VAR from "./constants-and-variables.js";
+import {weapon} from "./constants-and-variables.js";
 
 function startGame() {
   FUNC.createWall(CONST.WALL_WIDTH, CONST.WALL_HEIGHT, true, CONST.BLOCKS_WIDTH);
 
-  VAR.weapon.setVisible();
-  VAR.weapon.setAppended();
+  weapon.setVisible();
+  weapon.setAppended();
   FUNC.handleWeaponMoveAndShoot();
 
   FUNC.gravity();
