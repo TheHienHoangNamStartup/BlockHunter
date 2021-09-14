@@ -32,4 +32,3 @@ export const COLOR = {
 export var ammunition = []; // ammunition is an array of bullets
 export var wall = []; // wall is an array of blocks
 export var weapon = new Weapon(WEAPON_WIDTH, WEAPON_HEIGHT, FUNC.randomColor());
-// export var board = 
