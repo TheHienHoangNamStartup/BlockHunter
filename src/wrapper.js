@@ -5,20 +5,26 @@ export default class Wrapper {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.draw();
+    this.element = document.createElement("div");
+    this.setClassName();
+    this.initStyle();
+    this.setAppended();
   }
 
-  draw() {
-    let wrapper = document.createElement("div");
-    wrapper.className = "wrapper";
+  setClassName() {
+    this.element.className = "wrapper";
+  }
 
-    Object.assign(wrapper.style, {
+  initStyle() {
+    Object.assign(this.element.style, {
       width: `${this.width * CELL}rem`,
       height: `${this.height * CELL}rem`,
       backgroundColor: this.color,
       padding: `${CELL}rem`,
     });
+  }
 
-    $("body").appendChild(wrapper);
+  setAppended() {
+    $("body").appendChild(this.element);
   }
 }
