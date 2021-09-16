@@ -5,20 +5,26 @@ export default class Board {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.draw();
+    this.element = document.createElement("div");
+    this.setClassName();
+    this.initStyle();
+    this.setAppended();
   }
 
-  draw() {
-    let board = document.createElement("div");
-    board.className = "board";
+  setClassName() {
+    this.element.className = "board";
+  }
 
-    Object.assign(board.style, {
+  initStyle() {
+    Object.assign(this.element.style, {
       width: `${this.width * CELL}rem`,
       height: `${this.height * CELL}rem`,
       backgroundColor: this.color,
       marginLeft: `-${CELL}rem`,
     });
+  }
 
-    $(".wrapper").appendChild(board);
+  setAppended() {
+    $(".wrapper").appendChild(this.element);
   }
 }
