@@ -1,10 +1,10 @@
 import { $, CELL } from "./constants-and-variables.js";
 
 export default class Board {
-  constructor(width, height, color) {
+  constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.color = color;
+    this.color = "#ecf0f1";
     this.element = document.createElement("div");
     this.setClassName();
     this.initStyle();
@@ -26,5 +26,13 @@ export default class Board {
 
   setAppended() {
     $(".wrapper").appendChild(this.element);
+  }
+
+  newColumn(col) {
+    let boardColumn = document.createElement("div");
+    boardColumn.className = "boardColumn";
+    boardColumn.setAttribute("col", col);
+    boardColumn.style.width = `${CELL}rem`;
+    return boardColumn;
   }
 }

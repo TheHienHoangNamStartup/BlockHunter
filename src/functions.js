@@ -7,15 +7,16 @@ import * as CONST from "./constants-and-variables.js";
 import {weapon, wall, ammunition} from "./constants-and-variables.js";
 
 // BOARD------------------------------------------------------------------------------------------------
-export function createBoard(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
-  let board = new Board(width + 1, height, color);
+export function createBoard(width, height, createBlocks = true, blocksWidth = 1) {
+  let board = new Board(width + 1, height);
 
   if (createBlocks) {
     for (let col = 0; col < blocksWidth + 1; col++) {
-      let boardColumn = document.createElement("div");
-      boardColumn.className = "boardColumn";
-      boardColumn.setAttribute("col", col);
-      boardColumn.style.width = `${CONST.CELL}rem`;
+      // let boardColumn = document.createElement("div");
+      // boardColumn.className = "boardColumn";
+      // boardColumn.setAttribute("col", col);
+      // boardColumn.style.width = `${CONST.CELL}rem`;
+      let boardColumn = board.newColumn(col);
 
       let lastColor = "";
       for (let row = 0; row < height; row++) {
