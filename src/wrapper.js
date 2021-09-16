@@ -1,14 +1,14 @@
-import { $, CELL, DEFAULT_COLOR } from "./constants-and-variables.js";
+import { $, CELL, DEFAULT_COLOR, WRAPPER_WIDTH, WRAPPER_HEIGHT } from "./constants-and-variables.js";
 
 export default class Wrapper {
   constructor(width, height) {
-    this.width = width;
-    this.height = height;
+    this.width = WRAPPER_WIDTH;
+    this.height = WRAPPER_HEIGHT;
     this.color = DEFAULT_COLOR;
     this.element = document.createElement("div");
     this.setClassName();
     this.initStyle();
-    this.setAppended();
+    // this.setAppended();
   }
 
   setClassName() {

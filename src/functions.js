@@ -9,9 +9,9 @@ import {weapon, wall, ammunition} from "./constants-and-variables.js";
 
 
 // WRAPPER-----------------------------------------------------------------------------------------------
-export function createWrapper(width, height, color = "#ecf0f1") {
-  let wrapper = new Wrapper(width, height, color);
-}
+// export function createWrapper() {
+//   // let wrapper = new Wrapper();
+// }
 
 // BOARD------------------------------------------------------------------------------------------------
 export function createBoard(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {

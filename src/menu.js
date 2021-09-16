@@ -1,6 +1,6 @@
 import * as CONST from "./constants-and-variables.js";
 import * as FUNC from "./functions.js";
-import {weapon} from "./constants-and-variables.js";
+import { weapon } from "./constants-and-variables.js";
 
 function startGame() {
   FUNC.createBoard(CONST.BOARD_WIDTH, CONST.BOARD_HEIGHT, true, CONST.BLOCKS_WIDTH);

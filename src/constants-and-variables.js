@@ -1,5 +1,6 @@
 import * as FUNC from "./functions.js";
 import Weapon from "./weapon.js";
+import Wrapper from "./wrapper.js";
 
 export const $ = document.querySelector.bind(document);
 export const $$ = document.querySelectorAll.bind(document);
@@ -34,3 +35,4 @@ export const COLOR = {
 export var ammunition = []; // ammunition is an array of bullets
 export var wall = []; // wall is an array of blocks
 export var weapon = new Weapon(WEAPON_WIDTH, WEAPON_HEIGHT);
+export const wrapper = new Wrapper();
