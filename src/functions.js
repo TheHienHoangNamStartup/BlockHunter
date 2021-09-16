@@ -6,13 +6,6 @@ import Bullet from "./bullet.js";
 import * as CONST from "./constants-and-variables.js";
 import {weapon, wall, ammunition} from "./constants-and-variables.js";
 
-
-
-// WRAPPER-----------------------------------------------------------------------------------------------
-// export function createWrapper() {
-//   // let wrapper = new Wrapper();
-// }
-
 // BOARD------------------------------------------------------------------------------------------------
 export function createBoard(width, height, createBlocks = true, blocksWidth = 1, color = "#ecf0f1") {
   let board = new Board(width + 1, height, color);

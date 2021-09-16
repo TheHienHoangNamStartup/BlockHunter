@@ -8,7 +8,6 @@ export default class Wrapper {
     this.element = document.createElement("div");
     this.setClassName();
     this.initStyle();
-    // this.setAppended();
   }
 
   setClassName() {
