@@ -21,6 +21,8 @@ export const BLOCK_SPRITE = "./assets/images/covid.png";
 export const BULLET_SPRITE = "./assets/images/covid.png";
 // export const WEAPON_SPRITE = "./assets/images/....png";
 
+export const DEFAULT_COLOR = "#ecf0f1";
+
 export const COLOR = {
   red: "rgb(231, 76, 60)",
   yellow: "rgb(241, 196, 15)",
