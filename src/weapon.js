@@ -10,10 +10,6 @@ export default class Weapon {
     this.nextColor = FUNC.randomColor();
     // this.sprite = sprite;
     this.element = document.createElement("div");
-    this.init();
-  }
-
-  init() {
     this.setClassName();
     this.initStyle();
     this.activateColors();
